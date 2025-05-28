@@ -11,7 +11,7 @@ function App() {
 
     return (
         <div id='App'>
-            <div class>
+            <div>
                 <span style={{ fontWeight: 800, fontSize: "18px" }}>{value}</span>
                 <Button onClick={() => setValue(value + 1)} text="Click Me"></Button>
             </div>
