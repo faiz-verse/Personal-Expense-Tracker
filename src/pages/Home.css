@@ -3,12 +3,14 @@
 #home {
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(to top right, #a5b2ff, white ,white, white, white , white, #afffea);
+    background: linear-gradient(to top right, #a5b2ff, white, white, white, white, white, #afffea);
 
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+
+    user-select: none;
 }
 
 #bg-animation {
@@ -125,7 +127,7 @@
     justify-content: center;
     gap: 10px;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 70px;
+    font-size: 80px;
     font-weight: 700;
     overflow: hidden;
 }
@@ -140,6 +142,19 @@
     transform: translateY(100%);
     animation: move-up-title 1.5s ease-in-out 1s forwards
 }
+
+#home #title #title-helper {
+    font-size: 14px;
+    font-weight: 600;
+    position: fixed;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
 
 @keyframes move-up-title {
     0% {
@@ -185,14 +200,15 @@
     transition: all 0.2s ease-in-out;
 }
 
-#home-content button:hover, #home-content button:hover:active{
+#home-content button:hover,
+#home-content button:hover:active {
     background: #02f7b4;
     color: white;
 }
 
- #home-content button:hover:active{
+#home-content button:hover:active {
     scale: 0.97;
- }
+}
 
 @keyframes move-up {
     0% {
