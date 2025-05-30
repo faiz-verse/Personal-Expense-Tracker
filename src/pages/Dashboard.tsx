@@ -17,12 +17,16 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./Dashboard.css";
 
+// importing sub pages (views)
+import SubDashboard from "./SubDashboard";
+import Reports from "./Reports";
+import Budgets from "./Budgets";
+import History from "./History";
+
 const Dashboard = () => {
     // for icons
-    const DashboardIcon =
-        BsFillHouseDoorFill as React.ComponentType<IconBaseProps>;
-    const ReportIcon =
-        BsFileEarmarkBarGraphFill as React.ComponentType<IconBaseProps>;
+    const DashboardIcon = BsFillHouseDoorFill as React.ComponentType<IconBaseProps>;
+    const ReportIcon = BsFileEarmarkBarGraphFill as React.ComponentType<IconBaseProps>;
     const BudgetIcon = BsPiggyBankFill as React.ComponentType<IconBaseProps>;
     const HistoryIcon = BsArrowLeftRight as React.ComponentType<IconBaseProps>;
     const BackIcon = BsArrowBarLeft as React.ComponentType<IconBaseProps>;
@@ -40,6 +44,7 @@ const Dashboard = () => {
                         className="menu-option"
                         id="dashboard-option"
                         onClick={() => {
+                            navigate("/dashboard/sub-dashboard")
                             setActiveView("dashboard");
                         }}
                         style={{
@@ -62,6 +67,7 @@ const Dashboard = () => {
                         className="menu-option"
                         id="resports-option"
                         onClick={() => {
+                            navigate("/dashboard/reports")
                             setActiveView("reports");
                         }}
                         style={{
@@ -83,6 +89,7 @@ const Dashboard = () => {
                         className="menu-option"
                         id="budgets-option"
                         onClick={() => {
+                            navigate("/dashboard/budgets")
                             setActiveView("budgets");
                         }}
                         style={{
@@ -102,8 +109,9 @@ const Dashboard = () => {
                     </div>
                     <div
                         className="menu-option"
-                        id="profile-option"
+                        id="history-option"
                         onClick={() => {
+                            navigate("/dashboard/history")
                             setActiveView("history");
                         }}
                         style={{
@@ -136,12 +144,14 @@ const Dashboard = () => {
             </div>
 
             <div id="View">
-                <Router>
+                {/* <Router> // Not needed as already inside the router from the App.tsx*/}
                     <Routes>
-                        <Route path="/" element={<Home />}></Route>
-                        <Route path="/dashboard" element={<Dashboard />}></Route>
+                        <Route path="sub-dashboard" element={<SubDashboard />}></Route>
+                        <Route path="reports" element={<Reports />}></Route>
+                        <Route path="budgets" element={<Budgets />}></Route>
+                        <Route path="history" element={<History />}></Route>
                     </Routes>
-                </Router>
+                {/* </Router> */}
             </div>
         </div>
     );

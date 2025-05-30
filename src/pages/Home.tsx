@@ -76,8 +76,8 @@ const Home: React.FC = () => {
           )}
         </div>
 
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus magnam illum numquam rem. Odio quae fugit natus, adipisci quos repudiandae reiciendis quod excepturi facere necessitatibus beatae labore deleniti magnam minus suscipit, voluptatum perspiciatis voluptatem!</p>
-        <button onClick={() => navigate("/dashboard")}>Getting started</button>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis quidem adipisci at suscipit deleniti, fugit laborum perferendis quam quia error velit, maiores sint ab asperiores.</p>
+        <button onClick={() => navigate("/dashboard/sub-dashboard")}>Getting started</button>
       </div>
     </div>
   );

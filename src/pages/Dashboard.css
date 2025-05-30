@@ -69,3 +69,10 @@
     margin-right: 5px;
     cursor: pointer;
 }
+
+#View{
+    height: 100vh;
+    width: calc(100vw - 270px);
+    margin-left: 270px;
+    background: #cdd5ff;
+}
