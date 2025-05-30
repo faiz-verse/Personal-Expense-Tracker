@@ -1,0 +1,190 @@
+#sub-dashboard{
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0px 30px;
+    display: flex;
+    gap: 20px;
+}
+
+#sub-dashboard-left{
+    height: 100%;
+    width: 300px;
+    position: relative;
+    border: 2px solid green;
+}
+
+/* TITLE */
+#sub-dashboard #title{
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#sub-dashboard #title span:nth-child(1){
+    font-size: 30px;
+    font-weight: 600;
+}
+#sub-dashboard #title span:nth-child(2){
+    font-size: 14px;
+    color: gray;
+}
+
+/* BALANCE GRAPH */
+#balance-graph{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+}
+
+#balance-graph #balance{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#balance-graph #balance span:nth-child(1){
+    font-size: 14px;
+    color: gray;
+}
+#balance-graph #balance span:nth-child(2){
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#balance-graph #graph{
+    height: 175px;
+    width: 175px;
+    border-radius: 50%;
+    background: #cffff2;
+}
+
+#balance-graph #balance-spent{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+#balance-graph #balance-spent::before{
+    content: '';
+    height: 10px;
+    width: 20px;
+    background: #4d69ff;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    border-radius: 50px;
+}
+
+#balance-graph #balance-spent span:nth-child(1){
+    font-size: 14px;
+    color: gray;
+}
+#balance-graph #balance-spent span:nth-child(2){
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#balance-graph #balance-available{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+#balance-graph #balance-available::before{
+    content: '';
+    height: 10px;
+    width: 20px;
+    background: #02f7b4;
+    position: absolute;
+    top: 5px;
+    right: -25px;
+    border-radius: 50px;
+}
+
+#balance-graph #balance-available span:nth-child(1){
+    font-size: 14px;
+    color: gray;
+}
+#balance-graph #balance-available span:nth-child(2){
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* ADD EXPENSE */
+#add-expense-btn{
+    all: unset; /* Removing all default/previous css */
+    width: calc(100% - 20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    background: #e7eaff;
+    cursor: pointer;
+}
+
+/* sub-dashboard-right */
+#sub-dashboard-right{
+    height: 100%;
+    width: calc(100% - 320px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 2px solid red;
+}
+
+#sub-dashboard-right #sub-dashboard-right-top{
+    height: 35%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 2px solid blue;
+}
+
+#sub-dashboard-right #sub-dashboard-right-top span, #sub-dashboard-right #sub-dashboard-right-bottom span{
+    font-size: 14px;
+    color: gray;
+}
+
+#sub-dashboard-right #sub-dashboard-right-top #budget-cards{
+    width: 100%;
+    overflow-x: scroll;
+    display: flex;
+    gap: 10px;
+}
+
+#sub-dashboard-right #sub-dashboard-right-top .budget-card{
+    height: 150px;
+    width: 300px;
+    border: 2px solid red;
+}
+
+#sub-dashboard-right #sub-dashboard-right-bottom{
+    height: 75%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 2px solid yellow;
+}

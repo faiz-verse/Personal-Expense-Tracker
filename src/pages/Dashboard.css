@@ -71,8 +71,8 @@
 }
 
 #View{
-    height: 100vh;
-    width: calc(100vw - 270px);
+    height: calc(100vh - 40px);
+    width: calc(100vw - 300px);
     margin-left: 270px;
-    background: #cdd5ff;
+    /* background: #cdd5ff; */
 }
