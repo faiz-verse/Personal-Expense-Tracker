@@ -10,8 +10,9 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-
 import './SubDashboard.css'
+
+import AddExpenseModal from '../components/AddExpenseModal';
 
 const SubDashboard = () => {
 
@@ -96,6 +97,9 @@ const SubDashboard = () => {
                     </div>
                 </div>
             </div>
+
+            {/* add expense modal */}
+            <AddExpenseModal/>
         </div>
     )
 }

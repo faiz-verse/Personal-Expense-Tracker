@@ -1,0 +1,96 @@
+#add-expense-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.3); /* dark transparent background */
+    backdrop-filter: blur(4px); /* optional for blur effect */
+    z-index: 999; /* below the modal */
+}
+
+#add-expense-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 320px;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#add-expense-modal h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+}
+
+#add-expense-modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#add-expense-modal label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: gray;
+}
+
+#add-expense-modal input,
+#add-expense-modal select,
+#add-expense-modal textarea {
+    padding: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    resize: none;
+}
+
+#add-expense-modal textarea {
+    min-height: 60px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.modal-buttons button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease;
+
+    font-family: "Poppins", sans-serif;
+}
+
+.modal-buttons button[type="submit"] {
+    background-color: #4d69ff;
+    color: white;
+}
+
+.modal-buttons button[type="button"] {
+    background-color: #ddd;
+}
+
+.modal-buttons button:hover {
+    opacity: 0.9;
+}
+

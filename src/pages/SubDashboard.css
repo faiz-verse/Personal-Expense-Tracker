@@ -11,7 +11,7 @@
     height: 100%;
     width: 300px;
     position: relative;
-    border: 2px solid green;
+    /* border: 2px solid green; */
 }
 
 /* TITLE */
@@ -147,18 +147,18 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    border: 2px solid red;
+    gap: 10px;
+    /* border: 2px solid red; */
 }
 
 #sub-dashboard-right #sub-dashboard-right-top{
-    height: 35%;
+    min-height: 35%;
     width: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    border: 2px solid blue;
+    gap: 10px;
+    /* border: 2px solid blue; */
 }
 
 #sub-dashboard-right #sub-dashboard-right-top span, #sub-dashboard-right #sub-dashboard-right-bottom span{
@@ -166,25 +166,69 @@
     color: gray;
 }
 
-#sub-dashboard-right #sub-dashboard-right-top #budget-cards{
+#budget-cards {
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto; /* 'auto' is better than 'scroll' visually */
     display: flex;
-    gap: 10px;
+    box-sizing: border-box;
+    padding-bottom: 10px;
+    padding-right: 100px;
+    scrollbar-width: thin;
+
+    mask-image: linear-gradient(to right, black 80%, transparent);
 }
 
-#sub-dashboard-right #sub-dashboard-right-top .budget-card{
+.budget-card {
     height: 150px;
-    width: 300px;
-    border: 2px solid red;
+    min-width: 200px; /* Adjust based on how many cards you want to show at once */
+    margin-right: 16px; /* Optional spacing between cards */
+    /* border: 2px solid red; */
+    background: #e7eaff;
+    border-radius: 10px;
+    box-shadow: 0 5px 5px rgb(226, 226, 226);
 }
+
 
 #sub-dashboard-right #sub-dashboard-right-bottom{
-    height: 75%;
+    min-height: 62.5%;
     width: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    border: 2px solid yellow;
+    gap: 10px;
+    /* border: 2px solid yellow; */
+}
+
+#sub-dashboard-right #sub-dashboard-right-bottom #expenses{
+    height: 100%;
+    width: 100%;
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+    padding-bottom: 30px;
+    padding-right: 10px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+
+    mask-image: linear-gradient(to bottom, black 90%, transparent);
+
+    position: relative;
+}
+
+#sub-dashboard-right #sub-dashboard-right-bottom #expenses #expense-head{
+    min-height: 50px;
+    width: 100%;
+    background: #cffff2;
+    border-radius: 5px;
+    position: sticky;
+    top: 0%;
+}
+
+#sub-dashboard-right #sub-dashboard-right-bottom #expenses .expense{
+    min-height: 50px;
+    width: 100%;
+    background: #e7eaff;
+    border-radius: 5px;
 }
