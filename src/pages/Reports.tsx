@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Bubble } from 'react-chartjs-2';
 
 import './Reports.css';
@@ -81,6 +81,13 @@ const getRandomColor = () => {
 };
 
 const Reports = () => {
+
+    // For bubble hover
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const handleMouseEnter = (index: number) => setHoveredIndex(index);
+    const handleMouseLeave = () => setHoveredIndex(null);
+
+
     return (
         <div id='reports'>
             <div id='title'>
@@ -118,12 +125,16 @@ const Reports = () => {
                                     width: `${size}px`,
                                     height: `${size}px`,
                                     backgroundColor: color,
-                                    boxShadow: `0 0 20px ${color}`,
+                                    boxShadow: hoveredIndex === index ? `0 0 20px ${color}` : `0 0 10px ${color}`,
                                     margin: `-${10 + Math.random() * 20}px`,
                                     transform: `translateY(${-50 + Math.random() * 80}px)`,
-                                    zIndex: `${index}`,
-                                    opacity: '0.5',
+                                    zIndex: hoveredIndex === index ? '100' : `${index}`,
+                                    opacity: hoveredIndex === index ? '1' : '0.5',
+                                    scale: hoveredIndex === index ? '1.2' : '1',
                                 }}
+
+                                onMouseEnter={() => handleMouseEnter(index)}
+                                onMouseLeave={handleMouseLeave}
                             >
                                 {label}
                             </div>
@@ -132,8 +143,8 @@ const Reports = () => {
                 ) : (
                     <p>No expenses yet</p>
                 )}
-            </div>
 
+            </div>
 
         </div>
     );

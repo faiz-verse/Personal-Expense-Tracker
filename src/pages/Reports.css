@@ -49,5 +49,9 @@
     justify-content: center;
     color: white;
     font-size: 10px;
-    transition: all 1s ease-in-out;
+    transition: all 0.9s ease-in-out;
+}
+
+#bubble-chart .bubble:hover {
+    scale: 1.2;
 }
