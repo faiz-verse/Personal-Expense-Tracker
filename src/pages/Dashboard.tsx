@@ -33,6 +33,8 @@ const Dashboard = () => {
 
     const [activeView, setActiveView] = useState<string>("dashboard");
 
+    const [isModalActive, setIsModalActive] = useState<boolean>(false);
+
     const navigate = useNavigate();
 
     return (

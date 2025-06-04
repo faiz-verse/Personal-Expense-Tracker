@@ -99,7 +99,7 @@ const SubDashboard = () => {
             </div>
 
             {/* add expense modal */}
-            <AddExpenseModal/>
+            {/* <AddExpenseModal/> */}
         </div>
     )
 }
