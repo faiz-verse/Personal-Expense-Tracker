@@ -1,0 +1,27 @@
+#reports{
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* TITLE */
+#reports #title{
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#reports #title span:nth-child(1){
+    font-size: 30px;
+    font-weight: 600;
+}
+#reports #title span:nth-child(2){
+    font-size: 14px;
+    color: gray;
+}

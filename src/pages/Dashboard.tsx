@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { IconBaseProps } from "react-icons";
 import {
@@ -10,7 +10,7 @@ import {
 } from "react-icons/bs";
 
 // for navigating back to the home
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // For Routing
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -31,11 +31,20 @@ const Dashboard = () => {
     const HistoryIcon = BsArrowLeftRight as React.ComponentType<IconBaseProps>;
     const BackIcon = BsArrowBarLeft as React.ComponentType<IconBaseProps>;
 
-    const [activeView, setActiveView] = useState<string>("dashboard");
+    const [activeView, setActiveView] = useState<string>("sub-dashboard");
 
     const [isModalActive, setIsModalActive] = useState<boolean>(false);
 
     const navigate = useNavigate();
+
+    // to set the active view checking the path on load
+    const location = useLocation();
+    useEffect(() => {
+        // Extract the last part of the path (e.g. "reports" from "/dashboard/reports")
+        const pathParts = location.pathname.split("/");
+        const currentView = pathParts[pathParts.length - 1] || "sub-dashboard";
+        setActiveView(currentView);
+    }, [location.pathname]); // Runs whenever path changes
 
     return (
         <div id="Dashboard">
@@ -47,20 +56,20 @@ const Dashboard = () => {
                         id="dashboard-option"
                         onClick={() => {
                             navigate("/dashboard/sub-dashboard")
-                            setActiveView("dashboard");
+                            setActiveView("sub-dashboard");
                         }}
                         style={{
                             background:
-                                activeView === "dashboard" ? "#cdd5ff" : "transparent",
-                            fontWeight: activeView === "dashboard" ? "600" : "",
+                                activeView === "sub-dashboard" ? "#cdd5ff" : "transparent",
+                            fontWeight: activeView === "sub-dashboard" ? "600" : "",
                         }}
                     >
                         <DashboardIcon
                             className="menu-option-icon"
                             size={20}
-                            color={activeView === "dashboard" ? "white" : "#4d69ff"}
+                            color={activeView === "sub-dashboard" ? "white" : "#4d69ff"}
                             style={{
-                                background: activeView === "dashboard" ? "#4d69ff" : "white",
+                                background: activeView === "sub-dashboard" ? "#4d69ff" : "white",
                             }}
                         />
                         Dashboard
