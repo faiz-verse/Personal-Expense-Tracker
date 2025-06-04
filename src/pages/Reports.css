@@ -1,4 +1,4 @@
-#reports{
+#reports {
     height: 100%;
     width: 100%;
     box-sizing: border-box;
@@ -9,7 +9,7 @@
 }
 
 /* TITLE */
-#reports #title{
+#reports #title {
     width: fit-content;
     height: fit-content;
     display: flex;
@@ -17,11 +17,37 @@
     gap: 10px;
 }
 
-#reports #title span:nth-child(1){
+#reports #title span:nth-child(1) {
     font-size: 30px;
     font-weight: 600;
 }
-#reports #title span:nth-child(2){
+
+#reports #title span:nth-child(2) {
     font-size: 14px;
     color: gray;
+}
+
+/* BUBBLE CHART */
+#bubble-chart {
+    min-width: 800px;
+    min-height: 300px;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 20px;
+    background: #f9f9f9;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+#bubble-chart .bubble {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 10px;
+    transition: all 1s ease-in-out;
 }
