@@ -1,0 +1,80 @@
+#budgets {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* overflow-y: scroll;
+    scrollbar-width: thin;
+    mask-image: linear-gradient(to top, black 98%, transparent); */
+    position: relative;
+}
+
+/* TITLE */
+#budgets #title {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#budgets #title span:nth-child(1) {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+#budgets #title span:nth-child(2) {
+    font-size: 14px;
+    color: gray;
+}
+
+/* Month changer */
+#container-buttons{
+    position: absolute;
+    top: 65px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+#container-buttons #container-month{
+    width: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+#container-buttons #container-month #prev, #container-buttons #container-month #next{
+    all: unset;
+    height: 35px;
+    width: 35px;
+    background: #e7eaff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer
+}
+
+#container-buttons #add-budget, #container-buttons #add-expense{
+    all: unset;
+    height: 35px;
+    width: fit-content;
+    padding: 0 10px;
+    background: #e7eaff;
+    color: black;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border-radius: 5px;
+    cursor: pointer
+}
