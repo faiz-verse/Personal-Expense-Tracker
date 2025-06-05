@@ -1,56 +1,62 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+// for emoji picker
+import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 
 import './AddBudgetModal.css'
 
-interface Props{
+interface Props {
     isModalActive: boolean,
     setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const AddBudgetModal = ({isModalActive, setIsModalActive}: Props) => {
-  return (
-    <div id='add-budget-overlay' style={{display: isModalActive? 'flex': 'hidden'}}>
+const AddBudgetModal = ({ isModalActive, setIsModalActive }: Props) => {
+
+    const [selectedEmoji, setSelectedEmoji] = useState<string>('');
+    const [showPicker, setShowPicker] = useState<boolean>(false);
+
+    const handleEmojiClick = (emojiData: EmojiClickData) => {
+        setSelectedEmoji(emojiData.emoji);
+        setShowPicker(false);
+    };
+
+    return (
+        <div id='add-budget-overlay' style={{ display: isModalActive ? 'flex' : 'hidden' }}>
             <div id="add-budget-modal">
                 <h2>Add a New Budget</h2>
-
                 <form>
-
-                    <label>
-                        Budget:
-                        <select>
-                            <option>Main</option>
-                            <option>Budget 1</option>
-                            <option>Budget 2</option>
-                            <option>Budget 3</option>
-                            <option>Budget 4</option>
-                        </select>
-                    </label>
-
                     <label>
                         Title:
-                        <input type="text" placeholder="e.g. Grocery shopping" />
+                        <input type="text" placeholder="e.g. Bike expenses" />
                     </label>
 
                     <label>
-                        Amount (₹):
-                        <input type="number" placeholder="e.g. 1500" />
+                        Emoji:
+                        <div id='emoji-picker'>
+                            <input
+                                id="emoji"
+                                type="text"
+                                value={selectedEmoji}
+                                placeholder="Click emoji icon to pick"
+                                readOnly
+                            />
+
+                            <button id='emoji-button'
+                                type="button"
+                                onClick={() => setShowPicker(!showPicker)}
+                            >
+                                😊
+                            </button>
+
+                            {showPicker && (
+                                <div id='picker' style={{ marginTop: '20px', display: 'inline-block' }}>
+                                    <EmojiPicker onEmojiClick={handleEmojiClick} />
+                                </div>
+                            )}
+                        </div>
                     </label>
 
-                    <label>
-                        Category:
-                        <select>
-                            <option>Food</option>
-                            <option>Transport</option>
-                            <option>Rent</option>
-                            <option>Entertainment</option>
-                            <option>Others</option>
-                        </select>
-                    </label>
 
-                    <label>
-                        Date:
-                        <input type="date" />
-                    </label>
 
                     <label>
                         Description:
@@ -58,14 +64,14 @@ const AddBudgetModal = ({isModalActive, setIsModalActive}: Props) => {
                     </label>
 
                     <div className="modal-buttons">
-                        <button type="submit">Add Expense</button>
-                        <button type="button" onClick={()=> setIsModalActive(!isModalActive)}>Cancel</button>
+                        <button type="submit">Add Budget</button>
+                        <button type="button" onClick={() => setIsModalActive(!isModalActive)}>Cancel</button>
                     </div>
                 </form>
             </div>
 
         </div>
-  )
+    )
 }
 
 export default AddBudgetModal
