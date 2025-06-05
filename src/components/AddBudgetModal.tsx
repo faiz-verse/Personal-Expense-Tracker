@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, KeyboardEvent, ChangeEvent } from 'react'
 
 // for emoji picker
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
@@ -18,6 +18,33 @@ const AddBudgetModal = ({ isModalActive, setIsModalActive }: Props) => {
     const handleEmojiClick = (emojiData: EmojiClickData) => {
         setSelectedEmoji(emojiData.emoji);
         setShowPicker(false);
+    };
+
+    // Add Tag Area
+    const [tags, setTags] = useState<string[]>([]);
+    const [input, setInput] = useState<string>('');
+
+    const addTag = () => {
+        const trimmed = input.trim();
+        if (trimmed && !tags.includes(trimmed)) {
+            setTags([...tags, trimmed]);
+        }
+        setInput('');
+    };
+
+    const removeTag = (indexToRemove: number) => {
+        setTags(tags.filter((_, i) => i !== indexToRemove));
+    };
+
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' || e.key === ',') {
+            e.preventDefault();
+            addTag();
+        }
+    };
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setInput(e.target.value);
     };
 
     return (
@@ -62,15 +89,58 @@ const AddBudgetModal = ({ isModalActive, setIsModalActive }: Props) => {
                     </label>
 
                     <label>
-                        Category:
-                        <select>
-                            <option>Food</option>
-                            <option>Transport</option>
-                            <option>Rent</option>
-                            <option>Entertainment</option>
-                            <option>Others</option>
-                        </select>
+                        Category (create categories):                        
                     </label>
+                    <div
+                        style={{
+                            border: '1px solid #ccc',
+                            padding: '8px',
+                            borderRadius: '4px',
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '5px',
+                        }}
+                    >
+                        {tags.map((tag, index) => (
+                            <div
+                                key={index}
+                                style={{
+                                    background: '#e0e0e0',
+                                    padding: '5px 10px',
+                                    borderRadius: '15px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    fontSize: '14px',
+                                }}
+                            >
+                                {tag}
+                                <span
+                                    style={{
+                                        marginLeft: '8px',
+                                        cursor: 'pointer',
+                                        fontWeight: 'bold',
+                                    }}
+                                    onClick={() => removeTag(index)}
+                                >
+                                    &times;
+                                </span>
+                            </div>
+                        ))}
+                        <input
+                            type="text"
+                            placeholder="Type and press Enter"
+                            value={input}
+                            onChange={handleChange}
+                            onKeyDown={handleKeyDown}
+                            style={{
+                                border: 'none',
+                                outline: 'none',
+                                flex: 1,
+                                fontSize: '14px',
+                                minWidth: '120px',
+                            }}
+                        />
+                    </div>
 
                     <label>
                         Description:
