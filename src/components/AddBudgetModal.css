@@ -135,5 +135,6 @@
 
 #emoji-picker #picker{
     position: absolute;
+    top: -175px;
     right: -120%;
 }

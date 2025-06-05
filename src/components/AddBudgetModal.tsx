@@ -56,7 +56,21 @@ const AddBudgetModal = ({ isModalActive, setIsModalActive }: Props) => {
                         </div>
                     </label>
 
+                    <label>
+                        Limit (₹):
+                        <input type="number" placeholder="e.g. 9999" />
+                    </label>
 
+                    <label>
+                        Category:
+                        <select>
+                            <option>Food</option>
+                            <option>Transport</option>
+                            <option>Rent</option>
+                            <option>Entertainment</option>
+                            <option>Others</option>
+                        </select>
+                    </label>
 
                     <label>
                         Description:
