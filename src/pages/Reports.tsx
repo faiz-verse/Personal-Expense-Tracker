@@ -10,40 +10,25 @@ import {
     LinearScale,
     PointElement,
     LineElement,
+    ArcElement,
     Title,
     Tooltip,
     Legend
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Line, Pie } from 'react-chartjs-2';
 // Register required components
 ChartJS.register(
     CategoryScale,
     LinearScale,
     PointElement,
     LineElement,
+    ArcElement,
     Title,
     Tooltip,
     Legend
 );
-const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'top' as const  // 👈 FIX here
-        },
-        title: {
-            display: true,
-            text: 'Monthly Expenses'
-        },
-    },
-    scales: {
-        y: {
-            beginAtZero: true
-        }
-    }
-};
 
-// For Line chart
+// For Line chart (sample dataset)
 const expenses = [
     { label: "Jan", expenses: 8880, savings: 1000 },
     { label: "Feb", expenses: 7920, savings: 1500 },
@@ -58,6 +43,70 @@ const expenses = [
     { label: "Nov", expenses: 9200, savings: 1900 },
     { label: "Dec", expenses: 9500, savings: 2100 },
 ];
+const options = {
+    responsive: true,
+    plugins: {
+        legend: {
+            position: 'top' as const
+        },
+        title: {
+            display: true,
+            text: 'Monthly Expenses',
+            font: {
+                size: 14,
+                weight: 'bolder' as 'normal' | 'bold' | 'bolder' | 'lighter' | number // type cast
+            },
+            padding: {
+                top: 10,
+                bottom: 30
+            }
+        },
+    },
+    scales: {
+        y: {
+            beginAtZero: true,
+            ticks: {
+                stepSize: 500,  // 👈 Add this
+                callback: function (value: number | string) {
+                    return value; // Optional: format label
+                }
+            }
+        }
+    }
+};
+
+// For Pie Chart
+const PieChartData = [
+    { category: "Shopping", expense: 1000 },
+    { category: "Chicken", expense: 3000 },
+    { category: "Rent", expense: 2500 },
+    { category: "Transport", expense: 1000 },
+    { category: "Petrol", expense: 4000 },
+    { category: "Education", expense: 5000 },
+    { category: "Bike Maintainance", expense: 2000 },
+]
+const pieOptions = {
+    responsive: true,
+    plugins: {
+        title: {
+            display: true,
+            text: 'Expenses Breakdown',
+            font: {
+                size: 14,
+                weight: 'bolder' as 'normal' | 'bold' | 'bolder' | 'lighter' | number // type cast
+            },
+            padding: {
+                top: 10,
+                bottom: 30
+            }
+        },
+        legend: {
+            position: 'bottom' as const,
+        }
+    }
+};
+
+
 
 // For bubble chart
 const categories = [
@@ -121,7 +170,8 @@ const Reports = () => {
                                 onMouseEnter={() => handleMouseEnter(index)}
                                 onMouseLeave={handleMouseLeave}
                             >
-                                {label}
+                                <span>{label}</span>
+                                <div className='bubble-helper'>{value}</div>
                             </div>
                         );
                     })
@@ -130,32 +180,52 @@ const Reports = () => {
                 )}
             </div>
 
-            <div id='line-chart' style={{ maxWidth: '900px', margin: '50px auto' }}>
-                <Line data={{
-                    labels: expenses.map((data) => data.label),
-                    datasets: [
-                        {
-                            label: "Expenses",
-                            data: expenses.map((data) => data.expenses),
-                            backgroundColor: 'blue',
-                            borderColor: 'blue',
-                            borderWidth: 2,
-                            tension: 0.4,
-                            fill: false
-                        },
-                        {
-                            label: "Savings",
-                            data: expenses.map((data) => data.savings),
-                            backgroundColor: 'palegreen',
-                            borderColor: 'palegreen',
-                            borderWidth: 2,
-                            tension: 0.4,
-                            fill: false
-                        }
-                    ],
-                }} options={options} ></Line>
+            <div id='reports-bottom'>
+                {/* LINE CHART */}
+                <div id='line-chart'>
+                    <Line data={{
+                        labels: expenses.map((data) => data.label),
+                        datasets: [
+                            {
+                                label: "Expenses",
+                                data: expenses.map((data) => data.expenses),
+                                backgroundColor: 'cornflowerblue',
+                                borderColor: 'cornflowerblue',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: false
+                            },
+                            {
+                                label: "Savings",
+                                data: expenses.map((data) => data.savings),
+                                backgroundColor: 'palegreen',
+                                borderColor: 'palegreen',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: false
+                            }
+                        ],
+                    }} options={options} height={400} width={400}></Line>
+                </div>
+                {/* PIE CHART */}
+                <div id='pie-chart'>
+                    <Pie data={{
+                        labels: PieChartData.map((data) => data.category),
+                        datasets: [
+                            {
+                                label: "Expenses",
+                                data: PieChartData.map((data) => data.expense),
+                                backgroundColor: PieChartData.map(() => {
+                                    const hue = Math.floor(Math.random() * 360); // any hue
+                                    const saturation = 70 + Math.random() * 20; // 70–90%
+                                    const lightness = 50 + Math.random() * 10;  // 80–90%
+                                    return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+                                })
+                            }
+                        ],
+                    }} options={pieOptions} height={400} width={400}></Pie>
+                </div>
             </div>
-
         </div>
     );
 };
