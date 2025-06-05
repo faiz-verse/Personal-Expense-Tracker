@@ -1,8 +1,25 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { IconBaseProps } from "react-icons";
 import { BsChevronLeft, BsChevronRight, BsPlusLg } from "react-icons/bs";
 
 import './Budgets.css'
+
+interface budgetsModel {
+    title: string,
+    emoji: string,
+    limit: number,
+    status: string,
+    categories: string[]
+}
+
+interface budgetEntry {
+    date: Date,
+    category: string,
+    title: string,
+    description: string,
+    amount: number,
+    status: string
+}
 
 const Budgets = () => {
 
@@ -24,6 +41,25 @@ const Budgets = () => {
         setCurrentMonth(new Date(nextMonth));
     };
 
+
+    const[budget, setBudget] = useState<budgetsModel[]>([])
+    const[budgetEntries, setBudgetEntries] = useState<budgetEntry[]>([])
+
+    // Budgets
+    const budgets = [
+        {
+            title: "Budget 1",
+            emoji: "🍗",
+            limit: 10000,
+            status: "on track",
+            categories: [
+                "category 1",
+                "category 2",
+                "category 3",
+            ],
+        }
+    ]
+
     return (
         <div id='budgets'>
             <div id='title'>
@@ -37,9 +73,12 @@ const Budgets = () => {
                     <span>{monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}</span>
                     <button id='next' onClick={handleNext}><RightArrow size={16} color='4d69ff' strokeWidth={1} /></button>
                 </div>
-                <button id='add-budget'><PlusIcon size={18} color="#4d69ff" strokeWidth={1}/>New Budget</button>
-                <button id='add-expense'><PlusIcon size={18} color="#4d69ff" strokeWidth={1}/>New Expense</button>
+                <button id='add-budget'><PlusIcon size={18} color="#4d69ff" strokeWidth={1} />New Budget</button>
+                <button id='add-expense'><PlusIcon size={18} color="#4d69ff" strokeWidth={1} />New Expense</button>
             </div>
+
+            
+
         </div>
     )
 }

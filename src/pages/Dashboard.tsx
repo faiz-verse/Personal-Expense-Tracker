@@ -33,8 +33,6 @@ const Dashboard = () => {
 
     const [activeView, setActiveView] = useState<string>("sub-dashboard");
 
-    const [isModalActive, setIsModalActive] = useState<boolean>(false);
-
     const navigate = useNavigate();
 
     // to set the active view checking the path on load

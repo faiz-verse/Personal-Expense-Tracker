@@ -21,6 +21,8 @@ const SubDashboard = () => {
     const [balance, setBalance] = useState<number>(20000)
     const [balanceSpent, setBalanceSpent] = useState<number>(14000)
 
+    const [isModalActive, setIsModalActive] = useState<boolean>(false);
+
     return (
         <div id='sub-dashboard'>
             <div id='sub-dashboard-left'>
@@ -59,7 +61,9 @@ const SubDashboard = () => {
                     </div>
                 </div>
 
-                <button id='add-expense-btn'>
+                <button id='add-expense-btn'
+                    onClick={() => setIsModalActive(!isModalActive)}
+                >
                     <PlusIcon
                         className="menu-option-icon"
                         size={22}
@@ -74,10 +78,10 @@ const SubDashboard = () => {
                 <div id='sub-dashboard-right-top'>
                     <span>Your Current Budgets</span>
                     <div id='budget-cards'>
-                    <div className="budget-card"></div>
-                    <div className="budget-card"></div>
-                    <div className="budget-card"></div>
-                    <div className="budget-card"></div>
+                        <div className="budget-card"></div>
+                        <div className="budget-card"></div>
+                        <div className="budget-card"></div>
+                        <div className="budget-card"></div>
                     </div>
                 </div>
                 <div id='sub-dashboard-right-bottom'>
@@ -99,7 +103,7 @@ const SubDashboard = () => {
             </div>
 
             {/* add expense modal */}
-            {/* <AddExpenseModal/> */}
+            {!!isModalActive && <AddExpenseModal isModalActive={isModalActive} setIsModalActive={setIsModalActive} />}
         </div>
     )
 }

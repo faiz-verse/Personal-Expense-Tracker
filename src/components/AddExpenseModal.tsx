@@ -2,13 +2,30 @@ import React from 'react'
 
 import './AddExpenseModal.css'
 
-const AddExpenseModal = () => {
+interface Props{
+    isModalActive: boolean,
+    setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const AddExpenseModal = ({isModalActive, setIsModalActive} : Props) => {
     return (
-        <div id='add-expense-overlay'>
+        <div id='add-expense-overlay' style={{display: isModalActive? 'flex': 'hidden'}}>
             <div id="add-expense-modal">
                 <h2>Add a New Expense</h2>
 
                 <form>
+
+                    <label>
+                        Budget:
+                        <select>
+                            <option>Main</option>
+                            <option>Budget 1</option>
+                            <option>Budget 2</option>
+                            <option>Budget 3</option>
+                            <option>Budget 4</option>
+                        </select>
+                    </label>
+
                     <label>
                         Title:
                         <input type="text" placeholder="e.g. Grocery shopping" />
@@ -42,7 +59,7 @@ const AddExpenseModal = () => {
 
                     <div className="modal-buttons">
                         <button type="submit">Add Expense</button>
-                        <button type="button">Cancel</button>
+                        <button type="button" onClick={()=> setIsModalActive(!isModalActive)}>Cancel</button>
                     </div>
                 </form>
             </div>
