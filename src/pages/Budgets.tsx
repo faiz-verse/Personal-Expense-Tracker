@@ -5,12 +5,12 @@ import { BsChevronLeft, BsChevronRight, BsPlusLg } from "react-icons/bs";
 import './Budgets.css'
 
 import AddBudgetModal from '../components/AddBudgetModal';
+import AddExpenseModal from '../components/AddExpenseModal';
 
 interface budgetsModel {
     title: string,
     emoji: string,
     limit: number,
-    status?: string,
     categories: string[],
     description: string
 }
@@ -49,6 +49,7 @@ const Budgets = () => {
     const[budgetEntries, setBudgetEntries] = useState<budgetEntry[]>([])
 
     const [isModalActive, setIsModalActive] = useState<boolean>(false);
+    const [isExpModalActive, setIsExpModalActive] = useState<boolean>(false);
 
     // Budgets
     const budgets = [
@@ -79,11 +80,12 @@ const Budgets = () => {
                     <button id='next' onClick={handleNext}><RightArrow size={16} color='4d69ff' strokeWidth={1} /></button>
                 </div>
                 <button id='add-budget' onClick={()=>{setIsModalActive(!isModalActive)}}><PlusIcon size={18} color="#4d69ff" strokeWidth={1} />New Budget</button>
-                <button id='add-expense'><PlusIcon size={18} color="#4d69ff" strokeWidth={1} />New Expense</button>
+                <button id='add-expense' onClick={()=>{setIsExpModalActive(!isExpModalActive)}}><PlusIcon size={18} color="#4d69ff" strokeWidth={1} />New Expense</button>
             </div>
 
             {/* add budget modal */}
             {!!isModalActive && <AddBudgetModal isModalActive={isModalActive} setIsModalActive={setIsModalActive} />}
+            {!!isExpModalActive && <AddExpenseModal isModalActive={isExpModalActive} setIsModalActive={setIsExpModalActive} />}
 
         </div>
     )

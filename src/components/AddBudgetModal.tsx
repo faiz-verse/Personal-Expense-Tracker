@@ -12,6 +12,7 @@ interface Props {
 
 const AddBudgetModal = ({ isModalActive, setIsModalActive }: Props) => {
 
+    // Emoji Picker
     const [selectedEmoji, setSelectedEmoji] = useState<string>('');
     const [showPicker, setShowPicker] = useState<boolean>(false);
 
