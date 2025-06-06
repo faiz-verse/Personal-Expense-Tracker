@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IconBaseProps } from "react-icons";
 import { BsChevronLeft, BsChevronRight, BsPlusLg } from "react-icons/bs";
 
@@ -20,7 +20,7 @@ interface budgetsModel {
 interface budgetEntry {
     entryUUID: string,
     budgetUUID: string,
-    date: Date,
+    date: number,
     category: string,
     title: string,
     description: string,
@@ -49,7 +49,7 @@ const Budgets = () => {
     };
 
     // FOR BUDGET
-    const[budget, setBudget] = useState<budgetsModel[]>([
+    const [budget, setBudget] = useState<budgetsModel[]>([
         {
             UUID: "userid",
             budgetUUID: "budgetid1",
@@ -90,6 +90,7 @@ const Budgets = () => {
             description: "blah blah blah budget 3"
         }
     ]);
+    const [activeBudget, setActiveBudget] = useState<string>(budget[0].budgetUUID)
 
     // const handleAddBudget = (budget: budgetsModel, budgets: budgetsModel[], setBudget: React.Dispatch<React.SetStateAction<budgetsModel[]>>) => {
     //     if(budget){
@@ -97,11 +98,11 @@ const Budgets = () => {
     //     }
     // }
 
-    const[budgetEntries, setBudgetEntries] = useState<budgetEntry[]>([
+    const [budgetEntries, setBudgetEntries] = useState<budgetEntry[]>([
         {
             entryUUID: "entryid",
             budgetUUID: "budgetid1",
-            date: new Date(),
+            date: Date.now(),
             category: "budget 1 category 1",
             title: "Expense 1",
             description: "blah blah blah expense 1",
@@ -111,7 +112,7 @@ const Budgets = () => {
         {
             entryUUID: "entryid",
             budgetUUID: "budgetid3",
-            date: new Date(),
+            date: Date.now(),
             category: "budget 3 category 1",
             title: "Expense 2",
             description: "blah blah blah expense 2",
@@ -121,7 +122,7 @@ const Budgets = () => {
         {
             entryUUID: "entryid",
             budgetUUID: "budgetid2",
-            date: new Date(),
+            date: Date.now(),
             category: "budget 2 category 2",
             title: "Expense 3",
             description: "blah blah blah expense 3",
@@ -131,7 +132,7 @@ const Budgets = () => {
         {
             entryUUID: "entryid",
             budgetUUID: "budgetid1",
-            date: new Date(),
+            date: Date.now(),
             category: "budget 1 category 3",
             title: "Expense 4",
             description: "blah blah blah expense 4",
@@ -156,8 +157,8 @@ const Budgets = () => {
                     <span>{monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}</span>
                     <button id='next' onClick={handleNext}><RightArrow size={16} color='4d69ff' strokeWidth={1} /></button>
                 </div>
-                <button id='add-budget' onClick={()=>{setIsModalActive(!isModalActive)}}><PlusIcon size={18} color="#4d69ff" strokeWidth={1} />New Budget</button>
-                <button id='add-expense' onClick={()=>{setIsExpModalActive(!isExpModalActive)}}><PlusIcon size={18} color="#4d69ff" strokeWidth={1} />New Expense</button>
+                <button id='add-budget' onClick={() => { setIsModalActive(!isModalActive) }}><PlusIcon size={18} color="#4d69ff" strokeWidth={1} />New Budget</button>
+                <button id='add-expense' onClick={() => { setIsExpModalActive(!isExpModalActive) }}><PlusIcon size={18} color="#4d69ff" strokeWidth={1} />New Expense</button>
             </div>
 
             {/* add budget modal */}
@@ -168,12 +169,23 @@ const Budgets = () => {
                 <div id='budgets-nav'>
                     {budget.map((b, index) => {
                         return (
-                            <div className='b-nav'>{b.title}</div>
+                            <div key={index} className='b-nav' onClick={() => { setActiveBudget(b.budgetUUID); }}>{b.title}</div>
                         )
                     })}
                 </div>
                 <div id='budget-content'>
-
+                    {budgetEntries.filter((be) => be.budgetUUID === activeBudget).map((be, index) => {
+                        return (
+                            <div key={index} className='be-row'>
+                                <div className='be-cell'>{new Date(be.date).toLocaleDateString()}</div>
+                                <div className='be-cell'>{be.category}</div>
+                                <div className='be-cell'>{be.title}</div>
+                                <div className='be-cell'>{be.description}</div>
+                                <div className='be-cell'>{be.amount}</div>
+                                <div className='be-cell'>{be.paymentStatus}</div>
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
 
