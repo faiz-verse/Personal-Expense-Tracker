@@ -139,7 +139,7 @@ const Reports = () => {
         <div id='reports'>
             <div id='title'>
                 <span>Spendings Report</span>
-                <span>Look at your spendings 👀</span>
+                <span>Analyse all of your spendings 📊</span>
             </div>
 
             <div id="bubble-chart">

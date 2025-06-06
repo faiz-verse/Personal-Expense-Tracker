@@ -94,6 +94,8 @@ const Budgets = () => {
             {!!isModalActive && <AddBudgetModal isModalActive={isModalActive} setIsModalActive={setIsModalActive} />}
             {!!isExpModalActive && <AddExpenseModal isModalActive={isExpModalActive} setIsModalActive={setIsExpModalActive} />}
 
+            
+
         </div>
     )
 }

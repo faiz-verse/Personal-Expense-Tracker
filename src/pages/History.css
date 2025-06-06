@@ -1,0 +1,32 @@
+#history {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* overflow-y: scroll;
+    scrollbar-width: thin;
+    mask-image: linear-gradient(to top, black 98%, transparent); */
+    position: relative;
+}
+
+/* TITLE */
+#history #title {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#history #title span:nth-child(1) {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+#history #title span:nth-child(2) {
+    font-size: 14px;
+    color: gray;
+}
