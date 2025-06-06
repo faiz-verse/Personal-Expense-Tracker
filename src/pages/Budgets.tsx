@@ -170,14 +170,23 @@ const Budgets = () => {
                     {budget.map((b, index) => {
                         return (
                             <div key={index} className='b-nav' onClick={() => { setActiveBudget(b.budgetUUID); }}
-                                style={{background: activeBudget === b.budgetUUID ? '#e7eaff': 'transparent',
-                                    fontWeight: activeBudget === b.budgetUUID ? '600': '400'
+                                style={{
+                                    background: activeBudget === b.budgetUUID ? '#f9f9f9' : 'transparent',
+                                    fontWeight: activeBudget === b.budgetUUID ? '600' : '400'
                                 }}
                             >{b.title}</div>
                         )
                     })}
                 </div>
                 <div id='budgets-content'>
+                    <div className='be-head'>
+                        <div className='be-head-cell'>Date</div>
+                        <div className='be-head-cell'>Category</div>
+                        <div className='be-head-cell'>Title</div>
+                        <div className='be-head-cell'>Description</div>
+                        <div className='be-head-cell'>Amount</div>
+                        <div className='be-head-cell'>Status</div>
+                    </div>
                     {budgetEntries.filter((be) => be.budgetUUID === activeBudget).map((be, index) => {
                         return (
                             <div key={index} className='be-row'>
