@@ -169,11 +169,15 @@ const Budgets = () => {
                 <div id='budgets-nav'>
                     {budget.map((b, index) => {
                         return (
-                            <div key={index} className='b-nav' onClick={() => { setActiveBudget(b.budgetUUID); }}>{b.title}</div>
+                            <div key={index} className='b-nav' onClick={() => { setActiveBudget(b.budgetUUID); }}
+                                style={{background: activeBudget === b.budgetUUID ? '#e7eaff': 'transparent',
+                                    fontWeight: activeBudget === b.budgetUUID ? '600': '400'
+                                }}
+                            >{b.title}</div>
                         )
                     })}
                 </div>
-                <div id='budget-content'>
+                <div id='budgets-content'>
                     {budgetEntries.filter((be) => be.budgetUUID === activeBudget).map((be, index) => {
                         return (
                             <div key={index} className='be-row'>

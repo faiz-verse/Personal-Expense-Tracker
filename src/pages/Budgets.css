@@ -78,3 +78,28 @@
     border-radius: 5px;
     cursor: pointer
 }
+
+/* BUDGET CONTAINER */
+#budget-container{
+    height: 90%;
+    width: 100%;
+}
+
+#budget-container #budgets-nav{
+    width: fit-content;
+    align-items: center;
+    justify-content: start;
+    display: flex;
+    background: #f9f9f9;
+}
+
+#budget-container #budgets-nav .b-nav{
+    width: fit-content;
+    height: fit-content;
+    padding: 12px;
+}
+
+#budget-container #budgets-content{
+    background: #f9f9f9;
+    height: 90%;
+}
