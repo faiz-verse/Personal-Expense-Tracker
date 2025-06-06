@@ -30,3 +30,52 @@
     font-size: 14px;
     color: gray;
 }
+
+#all-expenses{
+    height: 87%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* border: 2px solid yellow; */
+}
+
+#all-expenses span{
+    font-size: 14px;
+    color: gray;
+}
+
+#all-expenses #expenses{
+    height: 100%;
+    width: 100%;
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+    padding-bottom: 30px;
+    padding-right: 10px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+
+    mask-image: linear-gradient(to bottom, black 90%, transparent);
+
+    position: relative;
+}
+
+#all-expenses #expenses #expense-head{
+    min-height: 50px;
+    width: 100%;
+    background: #cffff2;
+    border-radius: 5px;
+    position: sticky;
+    top: 0%;
+}
+
+#all-expenses #expenses .expense{
+    min-height: 50px;
+    width: 100%;
+    background: #e7eaff;
+    border-radius: 5px;
+}
