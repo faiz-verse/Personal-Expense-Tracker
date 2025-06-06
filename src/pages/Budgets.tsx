@@ -8,6 +8,8 @@ import AddBudgetModal from '../components/AddBudgetModal';
 import AddExpenseModal from '../components/AddExpenseModal';
 
 interface budgetsModel {
+    UUID: string,
+    budgetUUID: string,
     title: string,
     emoji: string,
     limit: number,
@@ -16,12 +18,14 @@ interface budgetsModel {
 }
 
 interface budgetEntry {
+    entryUUID: string,
+    budgetUUID: string,
     date: Date,
     category: string,
     title: string,
     description: string,
     amount: number,
-    status: string
+    paymentStatus: string
 }
 
 const Budgets = () => {
@@ -58,21 +62,6 @@ const Budgets = () => {
     const [isModalActive, setIsModalActive] = useState<boolean>(false);
     const [isExpModalActive, setIsExpModalActive] = useState<boolean>(false);
 
-    // Budgets
-    const budgets = [
-        {
-            title: "Budget 1",
-            emoji: "🍗",
-            limit: 10000,
-            status: "on track",
-            categories: [
-                "category 1",
-                "category 2",
-                "category 3",
-            ],
-        }
-    ]
-
     return (
         <div id='budgets'>
             <div id='title'>
@@ -94,7 +83,12 @@ const Budgets = () => {
             {!!isModalActive && <AddBudgetModal isModalActive={isModalActive} setIsModalActive={setIsModalActive} />}
             {!!isExpModalActive && <AddExpenseModal isModalActive={isExpModalActive} setIsModalActive={setIsExpModalActive} />}
 
-            
+            <div id='budget-container'>
+                <div id='budgets-nav'>
+                    
+                </div>
+            </div>
+
 
         </div>
     )
