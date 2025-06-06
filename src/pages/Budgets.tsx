@@ -49,7 +49,47 @@ const Budgets = () => {
     };
 
     // FOR BUDGET
-    const[budget, setBudget] = useState<budgetsModel[]>([])
+    const[budget, setBudget] = useState<budgetsModel[]>([
+        {
+            UUID: "userid",
+            budgetUUID: "budgetid",
+            title: "Budget 1",
+            emoji: "🍗",
+            limit: 10000,
+            categories: [
+                "budget 1 category 1",
+                "budget 1 category 2",
+                "budget 1 category 3",
+            ],
+            description: "blah blah blah budget 1"
+        },
+        {
+            UUID: "userid",
+            budgetUUID: "budgetid",
+            title: "Budget 2",
+            emoji: "🏍",
+            limit: 10000,
+            categories: [
+                "budget 2 category 1",
+                "budget 2 category 2",
+                "budget 2 category 3",
+            ],
+            description: "blah blah blah budget 2"
+        },
+        {
+            UUID: "userid",
+            budgetUUID: "budgetid",
+            title: "Budget 3",
+            emoji: "⛽",
+            limit: 10000,
+            categories: [
+                "budget 3 category 1",
+                "budget 3 category 2",
+                "budget 3 category 3",
+            ],
+            description: "blah blah blah budget 3"
+        }
+    ]);
 
     // const handleAddBudget = (budget: budgetsModel, budgets: budgetsModel[], setBudget: React.Dispatch<React.SetStateAction<budgetsModel[]>>) => {
     //     if(budget){
@@ -57,7 +97,7 @@ const Budgets = () => {
     //     }
     // }
 
-    const[budgetEntries, setBudgetEntries] = useState<budgetEntry[]>([])
+    const[budgetEntries, setBudgetEntries] = useState<budgetEntry[]>([]);
 
     const [isModalActive, setIsModalActive] = useState<boolean>(false);
     const [isExpModalActive, setIsExpModalActive] = useState<boolean>(false);
