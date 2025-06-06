@@ -52,7 +52,7 @@ const Budgets = () => {
     const[budget, setBudget] = useState<budgetsModel[]>([
         {
             UUID: "userid",
-            budgetUUID: "budgetid",
+            budgetUUID: "budgetid1",
             title: "Budget 1",
             emoji: "🍗",
             limit: 10000,
@@ -65,7 +65,7 @@ const Budgets = () => {
         },
         {
             UUID: "userid",
-            budgetUUID: "budgetid",
+            budgetUUID: "budgetid2",
             title: "Budget 2",
             emoji: "🏍",
             limit: 10000,
@@ -78,7 +78,7 @@ const Budgets = () => {
         },
         {
             UUID: "userid",
-            budgetUUID: "budgetid",
+            budgetUUID: "budgetid3",
             title: "Budget 3",
             emoji: "⛽",
             limit: 10000,
@@ -97,7 +97,48 @@ const Budgets = () => {
     //     }
     // }
 
-    const[budgetEntries, setBudgetEntries] = useState<budgetEntry[]>([]);
+    const[budgetEntries, setBudgetEntries] = useState<budgetEntry[]>([
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid1",
+            date: new Date(),
+            category: "budget 1 category 1",
+            title: "Expense 1",
+            description: "blah blah blah expense 1",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid3",
+            date: new Date(),
+            category: "budget 3 category 1",
+            title: "Expense 2",
+            description: "blah blah blah expense 2",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid2",
+            date: new Date(),
+            category: "budget 2 category 2",
+            title: "Expense 3",
+            description: "blah blah blah expense 3",
+            amount: 3000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid1",
+            date: new Date(),
+            category: "budget 1 category 3",
+            title: "Expense 4",
+            description: "blah blah blah expense 4",
+            amount: 1000,
+            paymentStatus: "paid"
+        }
+    ]);
 
     const [isModalActive, setIsModalActive] = useState<boolean>(false);
     const [isExpModalActive, setIsExpModalActive] = useState<boolean>(false);
@@ -125,7 +166,14 @@ const Budgets = () => {
 
             <div id='budget-container'>
                 <div id='budgets-nav'>
-                    
+                    {budget.map((b, index) => {
+                        return (
+                            <div className='b-nav'>{b.title}</div>
+                        )
+                    })}
+                </div>
+                <div id='budget-content'>
+
                 </div>
             </div>
 
