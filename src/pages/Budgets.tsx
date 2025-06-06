@@ -46,6 +46,13 @@ const Budgets = () => {
 
     // FOR BUDGET
     const[budget, setBudget] = useState<budgetsModel[]>([])
+
+    // const handleAddBudget = (budget: budgetsModel, budgets: budgetsModel[], setBudget: React.Dispatch<React.SetStateAction<budgetsModel[]>>) => {
+    //     if(budget){
+    //         setBudget([... budgets, budget])
+    //     }
+    // }
+
     const[budgetEntries, setBudgetEntries] = useState<budgetEntry[]>([])
 
     const [isModalActive, setIsModalActive] = useState<boolean>(false);
