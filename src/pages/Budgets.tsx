@@ -263,12 +263,12 @@ const Budgets = () => {
                     <div id='budgets-content-entries'>
                         {budgetEntries.filter((be) => be.budgetUUID === activeBudget).map((be, index) => {
                             return (
-                                <div key={index} className='be-row' style={{background: editableRow === be.entryUUID? '#e7eaff': 'transparent'}}>
+                                <div key={index} className='be-row' style={{ background: editableRow === be.entryUUID ? '#eff1ff' : 'transparent'}}>
                                     <input
                                         type='date'
                                         value={formatDateForInput(be.date)}
                                         className='be-cell'
-                                        readOnly={editableRow !== be.entryUUID}                                        
+                                        readOnly={editableRow !== be.entryUUID}
                                         onChange={(e) => {
                                             const updatedDate = new Date(e.target.value).getTime();
                                             const updatedEntries = budgetEntries.map((entry) => {
@@ -278,34 +278,43 @@ const Budgets = () => {
                                                 return entry;
                                             });
                                             setBudgetEntries(updatedEntries);
-                                            setEditableRow(null);
                                         }}
                                     ></input>
-                                    <input type='text' value={be.category} className='be-cell'></input>
-                                    <input type='text' value={be.title} className='be-cell'></input>
-                                    <input type='text' value={be.description} className='be-cell'></input>
-                                    <input type='text' value={be.amount} className='be-cell'></input>
-                                    <input type='text' value={be.paymentStatus} className='be-cell'></input>
+                                    <input type='text' value={be.category} className='be-cell'
+                                        readOnly={editableRow !== be.entryUUID}
+                                    ></input>
+                                    <input type='text' value={be.title} className='be-cell'
+                                        readOnly={editableRow !== be.entryUUID}
+                                    ></input>
+                                    <input type='text' value={be.description} className='be-cell'
+                                        readOnly={editableRow !== be.entryUUID}
+                                    ></input>
+                                    <input type='text' value={be.amount} className='be-cell'
+                                        readOnly={editableRow !== be.entryUUID}
+                                    ></input>
+                                    <input type='text' value={be.paymentStatus} className='be-cell'
+                                        readOnly={editableRow !== be.entryUUID}
+                                    ></input>
                                     <div className='edit-del-btn'>
-                                        { editableRow === null && <div className='edit-btn'
+                                        {editableRow === null && <div className='edit-btn'
                                             onClick={() => setEditableRow(be.entryUUID)}
                                         >
                                             <EditIcon size={16} color='#4d69ff' />
                                         </div>}
-                                        { editableRow === be.entryUUID && <div className='tick-btn'
-                                            onClick={() => setEditableRow(be.entryUUID)}
+                                        {editableRow === be.entryUUID && <div className='tick-btn'
+                                            onClick={() => setEditableRow(null)}
                                         >
-                                            <TickIcon size={18} color='palegreen' />
+                                            <TickIcon size={16} color='palegreen' />
                                         </div>}
-                                        { editableRow === null && <div className='delete-btn'
-                                            
+                                        {editableRow === null && <div className='delete-btn'
+
                                         >
                                             <DeleteIcon size={16} color='tomato' />
                                         </div>}
-                                        { editableRow === be.entryUUID && <div className='tick-btn'
+                                        {editableRow === be.entryUUID && <div className='tick-btn'
                                             onClick={() => setEditableRow(null)}
                                         >
-                                            <PlusIcon style={{rotate: '45deg'}} size={16} color='tomato' />
+                                            <PlusIcon style={{ rotate: '45deg' }} size={16} color='tomato' />
                                         </div>}
                                     </div>
                                 </div>
