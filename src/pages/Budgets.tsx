@@ -261,8 +261,8 @@ const Budgets = () => {
                             >{b.title} <span>{b.emoji}</span></div>
                         )
                     })}
-                    <div className='b-nav' onClick={() => {setIsModalActive(!isModalActive)}}>
-                        <PlusIcon size={18} color="#4d69ff" strokeWidth={1}/>
+                    <div className='b-nav' onClick={() => { setIsModalActive(!isModalActive) }}>
+                        <PlusIcon size={18} color="#4d69ff" strokeWidth={1} />
                     </div>
                 </div>
                 <div id='budgets-content'>
@@ -420,14 +420,21 @@ const Budgets = () => {
                                         )}
 
                                         {!isEditing && (
-                                            <div className='delete-btn'>
+                                            <div className='delete-btn' onClick={() => {
+                                                const confirmed = window.confirm("Are you sure you want to delete this entry?");
+                                                if (confirmed) {
+                                                    const updatedEntries = budgetEntries.filter(entry => entry.entryUUID !== be.entryUUID);
+                                                    setBudgetEntries(updatedEntries);
+                                                }
+                                            }}>
                                                 <DeleteIcon size={16} color='tomato' />
                                             </div>
                                         )}
                                     </div>
-                                </div> 
+                                </div>
                             );
                         })}
+                        {/* If no entries */}
                         {budgetEntries.filter((be) => {
                             const beDate = new Date(be.date);
                             return (
@@ -435,7 +442,7 @@ const Budgets = () => {
                                 beDate.getMonth() === currentMonth.getMonth() &&
                                 beDate.getFullYear() === currentMonth.getFullYear()
                             );
-                        }).length < 1 && <div style={{fontSize: '12px', margin: '10px 15px'}}>No Entries Found</div>}
+                        }).length < 1 && <div style={{ fontSize: '12px', margin: '10px 15px' }}>No Entries Found</div>}
                     </div>
                 </div>
             </div>
