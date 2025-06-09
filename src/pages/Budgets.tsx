@@ -262,7 +262,7 @@ const Budgets = () => {
                         )
                     })}
                     <div className='b-nav' onClick={() => {setIsModalActive(!isModalActive)}}>
-                        <PlusIcon size={22} color="#4d69ff" strokeWidth={0.6}/>
+                        <PlusIcon size={18} color="#4d69ff" strokeWidth={1}/>
                     </div>
                 </div>
                 <div id='budgets-content'>

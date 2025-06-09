@@ -116,9 +116,16 @@
 }
 
 #budget-container #budgets-nav .b-nav:last-child{
-    /* background: #cffff2; */
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #e7eaff;
     position: absolute;
-    right: -14.5%;
+    right: -45px;
     cursor: pointer;
 }
 
