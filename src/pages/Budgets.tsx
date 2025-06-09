@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { IconBaseProps } from "react-icons";
-import { BsChevronLeft, BsChevronRight, BsPlusLg } from "react-icons/bs";
+import { BsChevronLeft, BsChevronRight, BsPlusLg, BsPencilSquare, BsTrash3Fill, BsCheckLg } from "react-icons/bs";
 
 import './Budgets.css'
 
@@ -33,6 +33,10 @@ const Budgets = () => {
     const LeftArrow = BsChevronLeft as React.ComponentType<IconBaseProps>;
     const RightArrow = BsChevronRight as React.ComponentType<IconBaseProps>;
     const PlusIcon = BsPlusLg as React.ComponentType<IconBaseProps>;
+    const EditIcon = BsPencilSquare as React.ComponentType<IconBaseProps>;
+    const DeleteIcon = BsTrash3Fill as React.ComponentType<IconBaseProps>;
+    const TickIcon = BsCheckLg as React.ComponentType<IconBaseProps>;
+
     // For month change
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const monthNames = [
@@ -100,17 +104,17 @@ const Budgets = () => {
 
     const [budgetEntries, setBudgetEntries] = useState<budgetEntry[]>([
         {
-            entryUUID: "entryid",
+            entryUUID: "entryid1",
             budgetUUID: "budgetid1",
             date: Date.now(),
             category: "budget 1 category 1",
             title: "Expense 1",
-            description: "blah blah blah expense 1",
+            description: "blah blah blah expense 1 blah blah blah expense 1 blah blah blah",
             amount: 2000,
             paymentStatus: "paid"
         },
         {
-            entryUUID: "entryid",
+            entryUUID: "entryid2",
             budgetUUID: "budgetid3",
             date: Date.now(),
             category: "budget 3 category 1",
@@ -120,7 +124,7 @@ const Budgets = () => {
             paymentStatus: "paid"
         },
         {
-            entryUUID: "entryid",
+            entryUUID: "entryid3",
             budgetUUID: "budgetid2",
             date: Date.now(),
             category: "budget 2 category 2",
@@ -130,7 +134,7 @@ const Budgets = () => {
             paymentStatus: "paid"
         },
         {
-            entryUUID: "entryid",
+            entryUUID: "entryid4",
             budgetUUID: "budgetid1",
             date: Date.now(),
             category: "budget 1 category 3",
@@ -140,7 +144,7 @@ const Budgets = () => {
             paymentStatus: "paid"
         },
         {
-            entryUUID: "entryid",
+            entryUUID: "entryid5",
             budgetUUID: "budgetid1",
             date: Date.now(),
             category: "budget 1 category 1",
@@ -150,7 +154,7 @@ const Budgets = () => {
             paymentStatus: "paid"
         },
         {
-            entryUUID: "entryid",
+            entryUUID: "entryid6",
             budgetUUID: "budgetid3",
             date: Date.now(),
             category: "budget 3 category 1",
@@ -160,7 +164,7 @@ const Budgets = () => {
             paymentStatus: "paid"
         },
         {
-            entryUUID: "entryid",
+            entryUUID: "entryid7",
             budgetUUID: "budgetid2",
             date: Date.now(),
             category: "budget 2 category 2",
@@ -170,7 +174,7 @@ const Budgets = () => {
             paymentStatus: "paid"
         },
         {
-            entryUUID: "entryid",
+            entryUUID: "entryid8",
             budgetUUID: "budgetid1",
             date: Date.now(),
             category: "budget 1 category 3",
@@ -180,7 +184,7 @@ const Budgets = () => {
             paymentStatus: "paid"
         },
         {
-            entryUUID: "entryid",
+            entryUUID: "entryid9",
             budgetUUID: "budgetid1",
             date: Date.now(),
             category: "budget 1 category 1",
@@ -190,7 +194,7 @@ const Budgets = () => {
             paymentStatus: "paid"
         },
         {
-            entryUUID: "entryid",
+            entryUUID: "entryid10",
             budgetUUID: "budgetid3",
             date: Date.now(),
             category: "budget 3 category 1",
@@ -199,190 +203,19 @@ const Budgets = () => {
             amount: 2000,
             paymentStatus: "paid"
         },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid2",
-            date: Date.now(),
-            category: "budget 2 category 2",
-            title: "Expense 3",
-            description: "blah blah blah expense 3",
-            amount: 3000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid1",
-            date: Date.now(),
-            category: "budget 1 category 3",
-            title: "Expense 4",
-            description: "blah blah blah expense 4",
-            amount: 1000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid1",
-            date: Date.now(),
-            category: "budget 1 category 1",
-            title: "Expense 1",
-            description: "blah blah blah expense 1",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid3",
-            date: Date.now(),
-            category: "budget 3 category 1",
-            title: "Expense 2",
-            description: "blah blah blah expense 2",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid2",
-            date: Date.now(),
-            category: "budget 2 category 2",
-            title: "Expense 3",
-            description: "blah blah blah expense 3",
-            amount: 3000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid1",
-            date: Date.now(),
-            category: "budget 1 category 3",
-            title: "Expense 4",
-            description: "blah blah blah expense 4",
-            amount: 1000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid1",
-            date: Date.now(),
-            category: "budget 1 category 1",
-            title: "Expense 1",
-            description: "blah blah blah expense 1",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid3",
-            date: Date.now(),
-            category: "budget 3 category 1",
-            title: "Expense 2",
-            description: "blah blah blah expense 2",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid2",
-            date: Date.now(),
-            category: "budget 2 category 2",
-            title: "Expense 3",
-            description: "blah blah blah expense 3",
-            amount: 3000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid1",
-            date: Date.now(),
-            category: "budget 1 category 3",
-            title: "Expense 4",
-            description: "blah blah blah expense 4",
-            amount: 1000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid1",
-            date: Date.now(),
-            category: "budget 1 category 1",
-            title: "Expense 1",
-            description: "blah blah blah expense 1",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid3",
-            date: Date.now(),
-            category: "budget 3 category 1",
-            title: "Expense 2",
-            description: "blah blah blah expense 2",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid2",
-            date: Date.now(),
-            category: "budget 2 category 2",
-            title: "Expense 3",
-            description: "blah blah blah expense 3",
-            amount: 3000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid1",
-            date: Date.now(),
-            category: "budget 1 category 3",
-            title: "Expense 4",
-            description: "blah blah blah expense 4",
-            amount: 1000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid1",
-            date: Date.now(),
-            category: "budget 1 category 1",
-            title: "Expense 1",
-            description: "blah blah blah expense 1",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid3",
-            date: Date.now(),
-            category: "budget 3 category 1",
-            title: "Expense 2",
-            description: "blah blah blah expense 2",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid2",
-            date: Date.now(),
-            category: "budget 2 category 2",
-            title: "Expense 3",
-            description: "blah blah blah expense 3",
-            amount: 3000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid",
-            budgetUUID: "budgetid1",
-            date: Date.now(),
-            category: "budget 1 category 3",
-            title: "Expense 4",
-            description: "blah blah blah expense 4",
-            amount: 1000,
-            paymentStatus: "paid"
-        }
     ]);
 
     const [isModalActive, setIsModalActive] = useState<boolean>(false);
     const [isExpModalActive, setIsExpModalActive] = useState<boolean>(false);
+
+    // For date formating for input feild
+    const formatDateForInput = (timestamp: number) => {
+        const date = new Date(timestamp);
+        return date.toISOString().split('T')[0]; // gives "YYYY-MM-DD"
+    };
+
+    // For editable rows
+    const [editableRow, setEditableRow] = useState<string | null>(null);
 
     return (
         <div id='budgets'>
@@ -428,18 +261,56 @@ const Budgets = () => {
                         <div className='be-head-cell'>Status</div>
                     </div>
                     <div id='budgets-content-entries'>
-                    {budgetEntries.filter((be) => be.budgetUUID === activeBudget).map((be, index) => {
-                        return (
-                            <div key={index} className='be-row'>
-                                <div className='be-cell'>{new Date(be.date).toLocaleDateString()}</div>
-                                <div className='be-cell'>{be.category}</div>
-                                <div className='be-cell'>{be.title}</div>
-                                <div className='be-cell'>{be.description}</div>
-                                <div className='be-cell'>{be.amount}</div>
-                                <div className='be-cell'>{be.paymentStatus}</div>
-                            </div>
-                        )
-                    })}
+                        {budgetEntries.filter((be) => be.budgetUUID === activeBudget).map((be, index) => {
+                            return (
+                                <div key={index} className='be-row' style={{background: editableRow === be.entryUUID? '#e7eaff': 'transparent'}}>
+                                    <input
+                                        type='date'
+                                        value={formatDateForInput(be.date)}
+                                        className='be-cell'
+                                        readOnly={editableRow !== be.entryUUID}                                        
+                                        onChange={(e) => {
+                                            const updatedDate = new Date(e.target.value).getTime();
+                                            const updatedEntries = budgetEntries.map((entry) => {
+                                                if (entry.entryUUID === be.entryUUID) {
+                                                    return { ...entry, date: updatedDate };
+                                                }
+                                                return entry;
+                                            });
+                                            setBudgetEntries(updatedEntries);
+                                            setEditableRow(null);
+                                        }}
+                                    ></input>
+                                    <input type='text' value={be.category} className='be-cell'></input>
+                                    <input type='text' value={be.title} className='be-cell'></input>
+                                    <input type='text' value={be.description} className='be-cell'></input>
+                                    <input type='text' value={be.amount} className='be-cell'></input>
+                                    <input type='text' value={be.paymentStatus} className='be-cell'></input>
+                                    <div className='edit-del-btn'>
+                                        { editableRow === null && <div className='edit-btn'
+                                            onClick={() => setEditableRow(be.entryUUID)}
+                                        >
+                                            <EditIcon size={16} color='#4d69ff' />
+                                        </div>}
+                                        { editableRow === be.entryUUID && <div className='tick-btn'
+                                            onClick={() => setEditableRow(be.entryUUID)}
+                                        >
+                                            <TickIcon size={18} color='palegreen' />
+                                        </div>}
+                                        { editableRow === null && <div className='delete-btn'
+                                            
+                                        >
+                                            <DeleteIcon size={16} color='tomato' />
+                                        </div>}
+                                        { editableRow === be.entryUUID && <div className='tick-btn'
+                                            onClick={() => setEditableRow(null)}
+                                        >
+                                            <PlusIcon style={{rotate: '45deg'}} size={16} color='tomato' />
+                                        </div>}
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
             </div>

@@ -113,6 +113,10 @@
     font-size: 14px;
 }
 
+#budget-container #budgets-nav .b-nav span{
+    font-size: 16px;
+}
+
 #budget-container #budgets-content {
     background: #f9f9f9;
     height: calc(100% - 60px);
@@ -143,32 +147,38 @@
 
 #budget-container #budgets-content .be-head .be-head-cell:nth-child(1) {
     width: 10%;
+    margin-right: 15px;
 }
 
 #budget-container #budgets-content .be-head .be-head-cell:nth-child(2) {
     width: 20%;
+    margin-right: 10px;
 }
 
 #budget-container #budgets-content .be-head .be-head-cell:nth-child(3) {
     width: 20%;
+    margin-right: 10px;
 }
 
 #budget-container #budgets-content .be-head .be-head-cell:nth-child(4) {
     width: 30%;
+    margin-right: 10px;
 }
 
 #budget-container #budgets-content .be-head .be-head-cell:nth-child(5) {
     width: 10%;
+    margin-right: 10px;
 }
 
 #budget-container #budgets-content .be-head .be-head-cell:nth-child(6) {
     width: 10%;
+    margin-right: 10px;
 }
 
 #budget-container #budgets-content #budgets-content-entries {
     width: 100%;
     height: 100%;
-    padding-right: 10px;
+    padding-right: 20px;
     box-sizing: border-box;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -181,29 +191,49 @@
     display: flex;
     align-items: center;
     border-bottom: 1px solid lightgray;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 #budget-container #budgets-content .be-row .be-cell:nth-child(1) {
+    all: unset;
     width: 10%;
+    margin-right: 10px;
 }
 
 #budget-container #budgets-content .be-row .be-cell:nth-child(2) {
+    all: unset;
     width: 20%;
+    margin-right: 10px;
 }
 
 #budget-container #budgets-content .be-row .be-cell:nth-child(3) {
+    all: unset;
     width: 20%;
+    margin-right: 10px;
 }
 
 #budget-container #budgets-content .be-row .be-cell:nth-child(4) {
+    all: unset;
     width: 30%;
+    margin-right: 10px;
 }
 
 #budget-container #budgets-content .be-row .be-cell:nth-child(5) {
+    all: unset;
     width: 10%;
+    margin-right: 10px;
 }
 
 #budget-container #budgets-content .be-row .be-cell:nth-child(6) {
+    all: unset;
     width: 10%;
+    margin-right: 10px;
+}
+
+#budget-container #budgets-content .be-row .edit-del-btn{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
