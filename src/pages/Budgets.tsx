@@ -138,6 +138,246 @@ const Budgets = () => {
             description: "blah blah blah expense 4",
             amount: 1000,
             paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid1",
+            date: Date.now(),
+            category: "budget 1 category 1",
+            title: "Expense 1",
+            description: "blah blah blah expense 1",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid3",
+            date: Date.now(),
+            category: "budget 3 category 1",
+            title: "Expense 2",
+            description: "blah blah blah expense 2",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid2",
+            date: Date.now(),
+            category: "budget 2 category 2",
+            title: "Expense 3",
+            description: "blah blah blah expense 3",
+            amount: 3000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid1",
+            date: Date.now(),
+            category: "budget 1 category 3",
+            title: "Expense 4",
+            description: "blah blah blah expense 4",
+            amount: 1000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid1",
+            date: Date.now(),
+            category: "budget 1 category 1",
+            title: "Expense 1",
+            description: "blah blah blah expense 1",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid3",
+            date: Date.now(),
+            category: "budget 3 category 1",
+            title: "Expense 2",
+            description: "blah blah blah expense 2",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid2",
+            date: Date.now(),
+            category: "budget 2 category 2",
+            title: "Expense 3",
+            description: "blah blah blah expense 3",
+            amount: 3000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid1",
+            date: Date.now(),
+            category: "budget 1 category 3",
+            title: "Expense 4",
+            description: "blah blah blah expense 4",
+            amount: 1000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid1",
+            date: Date.now(),
+            category: "budget 1 category 1",
+            title: "Expense 1",
+            description: "blah blah blah expense 1",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid3",
+            date: Date.now(),
+            category: "budget 3 category 1",
+            title: "Expense 2",
+            description: "blah blah blah expense 2",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid2",
+            date: Date.now(),
+            category: "budget 2 category 2",
+            title: "Expense 3",
+            description: "blah blah blah expense 3",
+            amount: 3000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid1",
+            date: Date.now(),
+            category: "budget 1 category 3",
+            title: "Expense 4",
+            description: "blah blah blah expense 4",
+            amount: 1000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid1",
+            date: Date.now(),
+            category: "budget 1 category 1",
+            title: "Expense 1",
+            description: "blah blah blah expense 1",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid3",
+            date: Date.now(),
+            category: "budget 3 category 1",
+            title: "Expense 2",
+            description: "blah blah blah expense 2",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid2",
+            date: Date.now(),
+            category: "budget 2 category 2",
+            title: "Expense 3",
+            description: "blah blah blah expense 3",
+            amount: 3000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid1",
+            date: Date.now(),
+            category: "budget 1 category 3",
+            title: "Expense 4",
+            description: "blah blah blah expense 4",
+            amount: 1000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid1",
+            date: Date.now(),
+            category: "budget 1 category 1",
+            title: "Expense 1",
+            description: "blah blah blah expense 1",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid3",
+            date: Date.now(),
+            category: "budget 3 category 1",
+            title: "Expense 2",
+            description: "blah blah blah expense 2",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid2",
+            date: Date.now(),
+            category: "budget 2 category 2",
+            title: "Expense 3",
+            description: "blah blah blah expense 3",
+            amount: 3000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid1",
+            date: Date.now(),
+            category: "budget 1 category 3",
+            title: "Expense 4",
+            description: "blah blah blah expense 4",
+            amount: 1000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid1",
+            date: Date.now(),
+            category: "budget 1 category 1",
+            title: "Expense 1",
+            description: "blah blah blah expense 1",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid3",
+            date: Date.now(),
+            category: "budget 3 category 1",
+            title: "Expense 2",
+            description: "blah blah blah expense 2",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid2",
+            date: Date.now(),
+            category: "budget 2 category 2",
+            title: "Expense 3",
+            description: "blah blah blah expense 3",
+            amount: 3000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid",
+            budgetUUID: "budgetid1",
+            date: Date.now(),
+            category: "budget 1 category 3",
+            title: "Expense 4",
+            description: "blah blah blah expense 4",
+            amount: 1000,
+            paymentStatus: "paid"
         }
     ]);
 
@@ -174,7 +414,7 @@ const Budgets = () => {
                                     background: activeBudget === b.budgetUUID ? '#f9f9f9' : 'transparent',
                                     fontWeight: activeBudget === b.budgetUUID ? '600' : '400'
                                 }}
-                            >{b.title}</div>
+                            >{b.title} <span>{b.emoji}</span></div>
                         )
                     })}
                 </div>
