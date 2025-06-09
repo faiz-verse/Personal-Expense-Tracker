@@ -428,6 +428,14 @@ const Budgets = () => {
                                 </div>
                             );
                         })}
+                        {budgetEntries.filter((be) => {
+                            const beDate = new Date(be.date);
+                            return (
+                                be.budgetUUID === activeBudget &&
+                                beDate.getMonth() === currentMonth.getMonth() &&
+                                beDate.getFullYear() === currentMonth.getFullYear()
+                            );
+                        }).length < 1 && <div style={{fontSize: '12px', margin: '10px 15px'}}>No Entries Found</div>}
                     </div>
                 </div>
             </div>
