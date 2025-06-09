@@ -148,7 +148,7 @@ const Budgets = () => {
             budgetUUID: "budgetid1",
             date: Date.now(),
             category: "budget 1 category 1",
-            title: "Expense 1",
+            title: "Expense 5",
             description: "blah blah blah expense 1",
             amount: 2000,
             paymentStatus: "paid"
@@ -158,7 +158,7 @@ const Budgets = () => {
             budgetUUID: "budgetid3",
             date: Date.now(),
             category: "budget 3 category 1",
-            title: "Expense 2",
+            title: "Expense 6",
             description: "blah blah blah expense 2",
             amount: 2000,
             paymentStatus: "paid"
@@ -168,7 +168,7 @@ const Budgets = () => {
             budgetUUID: "budgetid2",
             date: Date.now(),
             category: "budget 2 category 2",
-            title: "Expense 3",
+            title: "Expense 7",
             description: "blah blah blah expense 3",
             amount: 3000,
             paymentStatus: "paid"
@@ -178,7 +178,7 @@ const Budgets = () => {
             budgetUUID: "budgetid1",
             date: Date.now(),
             category: "budget 1 category 3",
-            title: "Expense 4",
+            title: "Expense 8",
             description: "blah blah blah expense 4",
             amount: 1000,
             paymentStatus: "paid"
@@ -188,7 +188,7 @@ const Budgets = () => {
             budgetUUID: "budgetid1",
             date: Date.now(),
             category: "budget 1 category 1",
-            title: "Expense 1",
+            title: "Expense 9",
             description: "blah blah blah expense 1",
             amount: 2000,
             paymentStatus: "paid"
@@ -198,7 +198,17 @@ const Budgets = () => {
             budgetUUID: "budgetid3",
             date: Date.now(),
             category: "budget 3 category 1",
-            title: "Expense 2",
+            title: "Expense 10",
+            description: "blah blah blah expense 2",
+            amount: 2000,
+            paymentStatus: "paid"
+        },
+        {
+            entryUUID: "entryid11",
+            budgetUUID: "budgetid1",
+            date: 1752537600000, //July date just for test
+            category: "budget 1 category 1",
+            title: "Expense 11",
             description: "blah blah blah expense 2",
             amount: 2000,
             paymentStatus: "paid"
@@ -216,6 +226,7 @@ const Budgets = () => {
 
     // For editable rows
     const [editableRow, setEditableRow] = useState<string | null>(null);
+    const [tempEditEntry, setTempEditEntry] = useState<any | null>(null);
 
     return (
         <div id='budgets'>
@@ -261,64 +272,158 @@ const Budgets = () => {
                         <div className='be-head-cell'>Status</div>
                     </div>
                     <div id='budgets-content-entries'>
-                        {budgetEntries.filter((be) => be.budgetUUID === activeBudget).map((be, index) => {
+                        {budgetEntries.filter((be) => {
+                            const beDate = new Date(be.date);
                             return (
-                                <div key={index} className='be-row' style={{ background: editableRow === be.entryUUID ? '#eff1ff' : 'transparent'}}>
+                                be.budgetUUID === activeBudget &&
+                                beDate.getMonth() === currentMonth.getMonth() &&
+                                beDate.getFullYear() === currentMonth.getFullYear()
+                            );
+                        }).map((be, index) => {
+                            const isEditing = editableRow === be.entryUUID; // boolean to check entryUUID
+                            return (
+                                <div
+                                    key={index}
+                                    className='be-row'
+                                    style={{ background: isEditing ? '#eff1ff' : 'transparent' }}
+                                >
+                                    {/* Date */}
                                     <input
                                         type='date'
-                                        value={formatDateForInput(be.date)}
+                                        value={formatDateForInput(isEditing ? tempEditEntry?.date : be.date)}
                                         className='be-cell'
-                                        readOnly={editableRow !== be.entryUUID}
+                                        readOnly={!isEditing}
                                         onChange={(e) => {
                                             const updatedDate = new Date(e.target.value).getTime();
-                                            const updatedEntries = budgetEntries.map((entry) => {
-                                                if (entry.entryUUID === be.entryUUID) {
-                                                    return { ...entry, date: updatedDate };
-                                                }
-                                                return entry;
-                                            });
-                                            setBudgetEntries(updatedEntries);
+                                            setTempEditEntry({ ...tempEditEntry, date: updatedDate });
                                         }}
-                                    ></input>
-                                    <input type='text' value={be.category} className='be-cell'
-                                        readOnly={editableRow !== be.entryUUID}
-                                    ></input>
-                                    <input type='text' value={be.title} className='be-cell'
-                                        readOnly={editableRow !== be.entryUUID}
-                                    ></input>
-                                    <input type='text' value={be.description} className='be-cell'
-                                        readOnly={editableRow !== be.entryUUID}
-                                    ></input>
-                                    <input type='text' value={be.amount} className='be-cell'
-                                        readOnly={editableRow !== be.entryUUID}
-                                    ></input>
-                                    <input type='text' value={be.paymentStatus} className='be-cell'
-                                        readOnly={editableRow !== be.entryUUID}
-                                    ></input>
-                                    <div className='edit-del-btn'>
-                                        {editableRow === null && <div className='edit-btn'
-                                            onClick={() => setEditableRow(be.entryUUID)}
-                                        >
-                                            <EditIcon size={16} color='#4d69ff' />
-                                        </div>}
-                                        {editableRow === be.entryUUID && <div className='tick-btn'
-                                            onClick={() => setEditableRow(null)}
-                                        >
-                                            <TickIcon size={16} color='palegreen' />
-                                        </div>}
-                                        {editableRow === null && <div className='delete-btn'
+                                    />
 
+                                    {/* Category */}
+                                    {isEditing ? (
+                                        <select
+                                            className='be-cell'
+                                            value={tempEditEntry?.category || ''}
+                                            onChange={(e) => setTempEditEntry({ ...tempEditEntry, category: e.target.value })}
                                         >
-                                            <DeleteIcon size={16} color='tomato' />
-                                        </div>}
-                                        {editableRow === be.entryUUID && <div className='tick-btn'
-                                            onClick={() => setEditableRow(null)}
+                                            {budget.find((b) => b.budgetUUID === activeBudget)?.categories.map((cat, idx) => (
+                                                <option key={idx} value={cat}>
+                                                    {cat}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    ) : (
+                                        <input type='text' value={be.category} className='be-cell' readOnly />
+                                    )}
+
+                                    {/* Title */}
+                                    <input
+                                        type='text'
+                                        value={isEditing ? tempEditEntry?.title : be.title}
+                                        className='be-cell'
+                                        readOnly={!isEditing}
+                                        onChange={(e) => setTempEditEntry({ ...tempEditEntry, title: e.target.value })}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter') {
+                                                e.preventDefault();
+                                                setEditableRow(null);
+                                            }
+                                        }}
+                                    />
+
+                                    {/* Description */}
+                                    <textarea
+                                        value={isEditing ? tempEditEntry?.description : be.description}
+                                        className='be-cell'
+                                        readOnly={!isEditing}
+                                        onChange={(e) => setTempEditEntry({ ...tempEditEntry, description: e.target.value })}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' && !e.shiftKey) {
+                                                e.preventDefault();
+                                                setEditableRow(null);
+                                            }
+                                        }}
+                                    />
+
+                                    {/* Amount */}
+                                    <input
+                                        type='number'
+                                        value={isEditing ? tempEditEntry?.amount : be.amount}
+                                        className='be-cell'
+                                        readOnly={!isEditing}
+                                        onChange={(e) => setTempEditEntry({ ...tempEditEntry, amount: Number(e.target.value) })}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter') {
+                                                e.preventDefault();
+                                                setEditableRow(null);
+                                            }
+                                        }}
+                                    />
+
+                                    {/* Status */}
+                                    {isEditing ? (
+                                        <select
+                                            className='be-cell'
+                                            value={tempEditEntry?.paymentStatus || ''}
+                                            onChange={(e) => setTempEditEntry({ ...tempEditEntry, paymentStatus: e.target.value })}
                                         >
-                                            <PlusIcon style={{ rotate: '45deg' }} size={16} color='tomato' />
-                                        </div>}
+                                            <option value='paid'>paid</option>
+                                            <option value='pending'>pending</option>
+                                        </select>
+                                    ) : (
+                                        <input type='text' value={be.paymentStatus} className='be-cell' readOnly />
+                                    )}
+
+                                    {/* Buttons */}
+                                    <div className='edit-del-btn'>
+                                        {!isEditing && (
+                                            <div
+                                                className='edit-btn'
+                                                onClick={() => {
+                                                    setEditableRow(be.entryUUID);
+                                                    setTempEditEntry({ ...be });
+                                                }}
+                                            >
+                                                <EditIcon size={16} color='#4d69ff' strokeWidth={0.3} />
+                                            </div>
+                                        )}
+
+                                        {isEditing && (
+                                            <>
+                                                <div
+                                                    className='tick-btn'
+                                                    onClick={() => {
+                                                        const updatedEntries = budgetEntries.map((entry) =>
+                                                            entry.entryUUID === tempEditEntry.entryUUID ? tempEditEntry : entry
+                                                        );
+                                                        setBudgetEntries(updatedEntries);
+                                                        setEditableRow(null);
+                                                        setTempEditEntry(null);
+                                                    }}
+                                                >
+                                                    <TickIcon size={16} color='palegreen' strokeWidth={1} />
+                                                </div>
+
+                                                <div
+                                                    className='tick-btn'
+                                                    onClick={() => {
+                                                        setEditableRow(null);
+                                                        setTempEditEntry(null);
+                                                    }}
+                                                >
+                                                    <PlusIcon style={{ rotate: '45deg' }} size={16} color='tomato' strokeWidth={1} />
+                                                </div>
+                                            </>
+                                        )}
+
+                                        {!isEditing && (
+                                            <div className='delete-btn'>
+                                                <DeleteIcon size={16} color='tomato' />
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
-                            )
+                            );
                         })}
                     </div>
                 </div>
