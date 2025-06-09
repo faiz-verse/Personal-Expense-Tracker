@@ -425,7 +425,7 @@ const Budgets = () => {
                                             </div>
                                         )}
                                     </div>
-                                </div>
+                                </div> 
                             );
                         })}
                         {budgetEntries.filter((be) => {
@@ -439,7 +439,6 @@ const Budgets = () => {
                     </div>
                 </div>
             </div>
-
 
         </div>
     )
