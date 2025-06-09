@@ -12,9 +12,7 @@ const AddExpenseModal = ({isModalActive, setIsModalActive} : Props) => {
         <div id='add-expense-overlay' style={{display: isModalActive? 'flex': 'hidden'}}>
             <div id="add-expense-modal">
                 <h2>Add a New Expense</h2>
-
                 <form>
-
                     <label>
                         Budget:
                         <select>
@@ -27,13 +25,8 @@ const AddExpenseModal = ({isModalActive, setIsModalActive} : Props) => {
                     </label>
 
                     <label>
-                        Title:
-                        <input type="text" placeholder="e.g. Grocery shopping" />
-                    </label>
-
-                    <label>
-                        Amount (₹):
-                        <input type="number" placeholder="e.g. 1500" />
+                        Date:
+                        <input type="date" />
                     </label>
 
                     <label>
@@ -48,8 +41,21 @@ const AddExpenseModal = ({isModalActive, setIsModalActive} : Props) => {
                     </label>
 
                     <label>
-                        Date:
-                        <input type="date" />
+                        Title:
+                        <input type="text" placeholder="e.g. Grocery shopping" />
+                    </label>
+
+                    <label>
+                        Amount (₹):
+                        <input type="number" placeholder="e.g. 1500" />
+                    </label>
+
+                    <label>
+                        Payment Status:
+                        <select>
+                            <option>Paid</option>
+                            <option>Pending</option>
+                        </select>
                     </label>
 
                     <label>
