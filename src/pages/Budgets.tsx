@@ -443,6 +443,7 @@ const Budgets = () => {
                                 beDate.getFullYear() === currentMonth.getFullYear()
                             );
                         }).length < 1 && <div style={{ fontSize: '12px', margin: '10px 15px' }}>No Entries Found</div>}
+                        
                     </div>
                 </div>
             </div>
