@@ -32,7 +32,7 @@
 }
 
 /* Month changer */
-#container-buttons{
+#container-buttons {
     position: absolute;
     top: 65px;
     right: 20px;
@@ -43,7 +43,7 @@
 }
 
 
-#container-buttons #container-month{
+#container-buttons #container-month {
     width: 220px;
     display: flex;
     align-items: center;
@@ -51,7 +51,8 @@
     font-weight: 600;
 }
 
-#container-buttons #container-month #prev, #container-buttons #container-month #next{
+#container-buttons #container-month #prev,
+#container-buttons #container-month #next {
     all: unset;
     height: 35px;
     width: 35px;
@@ -63,7 +64,8 @@
     cursor: pointer
 }
 
-#container-buttons #add-budget, #container-buttons #add-expense{
+#container-buttons #add-budget,
+#container-buttons #add-expense {
     all: unset;
     height: 35px;
     width: fit-content;
@@ -80,12 +82,12 @@
 }
 
 /* BUDGET CONTAINER */
-#budget-container{
+#budget-container {
     height: 90%;
     width: 100%;
 }
 
-#budget-container #budgets-nav{
+#budget-container #budgets-nav {
     min-height: 50px;
     height: 50px;
     box-sizing: border-box;
@@ -97,7 +99,7 @@
     border-radius: 10px 10px 0px 0px;
 }
 
-#budget-container #budgets-nav .b-nav{
+#budget-container #budgets-nav .b-nav {
     min-height: 50px;
     height: 50px;
     width: fit-content;
@@ -111,26 +113,26 @@
     font-size: 14px;
 }
 
-#budget-container #budgets-content{
+#budget-container #budgets-content {
     background: #f9f9f9;
-    height: calc(100% - 50px);
+    height: calc(100% - 60px);
     border-radius: 0px 10px 10px 10px;
     display: flex;
     flex-direction: column;
-    padding: 0px 10px 10px 20px; 
-    gap: 10px;
+    padding: 0px 0px 10px 20px;
     box-sizing: border-box;
-    overflow-y: scroll;
     position: relative;
 }
 
-#budget-container #budgets-content .be-head{
+#budget-container #budgets-content .be-head {
     background: #f9f9f9;
     position: sticky;
     top: 0%;
-    min-height: 40px;
-    height: 40px;
+    min-height: 50px;
+    height: 50px;
     padding-top: 10px;
+    padding-right: 20px;
+    box-sizing: border-box;
     width: 100%;
     display: flex;
     align-items: center;
@@ -139,26 +141,40 @@
     font-weight: 600;
 }
 
-#budget-container #budgets-content .be-head .be-head-cell:nth-child(1){
-    width: 10%;
-}
-#budget-container #budgets-content .be-head .be-head-cell:nth-child(2){
-    width: 20%;
-}
-#budget-container #budgets-content .be-head .be-head-cell:nth-child(3){
-    width: 20%;
-}
-#budget-container #budgets-content .be-head .be-head-cell:nth-child(4){
-    width: 30%;
-}
-#budget-container #budgets-content .be-head .be-head-cell:nth-child(5){
-    width: 10%;
-}
-#budget-container #budgets-content .be-head .be-head-cell:nth-child(6){
+#budget-container #budgets-content .be-head .be-head-cell:nth-child(1) {
     width: 10%;
 }
 
-#budget-container #budgets-content .be-row{
+#budget-container #budgets-content .be-head .be-head-cell:nth-child(2) {
+    width: 20%;
+}
+
+#budget-container #budgets-content .be-head .be-head-cell:nth-child(3) {
+    width: 20%;
+}
+
+#budget-container #budgets-content .be-head .be-head-cell:nth-child(4) {
+    width: 30%;
+}
+
+#budget-container #budgets-content .be-head .be-head-cell:nth-child(5) {
+    width: 10%;
+}
+
+#budget-container #budgets-content .be-head .be-head-cell:nth-child(6) {
+    width: 10%;
+}
+
+#budget-container #budgets-content #budgets-content-entries {
+    width: 100%;
+    height: 100%;
+    padding-right: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+#budget-container #budgets-content .be-row {
     min-height: 40px;
     height: 40px;
     width: 100%;
@@ -168,21 +184,26 @@
     font-size: 14px;
 }
 
-#budget-container #budgets-content .be-row .be-cell:nth-child(1){
+#budget-container #budgets-content .be-row .be-cell:nth-child(1) {
     width: 10%;
 }
-#budget-container #budgets-content .be-row .be-cell:nth-child(2){
+
+#budget-container #budgets-content .be-row .be-cell:nth-child(2) {
     width: 20%;
 }
-#budget-container #budgets-content .be-row .be-cell:nth-child(3){
+
+#budget-container #budgets-content .be-row .be-cell:nth-child(3) {
     width: 20%;
 }
-#budget-container #budgets-content .be-row .be-cell:nth-child(4){
+
+#budget-container #budgets-content .be-row .be-cell:nth-child(4) {
     width: 30%;
 }
-#budget-container #budgets-content .be-row .be-cell:nth-child(5){
+
+#budget-container #budgets-content .be-row .be-cell:nth-child(5) {
     width: 10%;
 }
-#budget-container #budgets-content .be-row .be-cell:nth-child(6){
+
+#budget-container #budgets-content .be-row .be-cell:nth-child(6) {
     width: 10%;
 }

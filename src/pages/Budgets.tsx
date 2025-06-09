@@ -427,6 +427,7 @@ const Budgets = () => {
                         <div className='be-head-cell'>Amount</div>
                         <div className='be-head-cell'>Status</div>
                     </div>
+                    <div id='budgets-content-entries'>
                     {budgetEntries.filter((be) => be.budgetUUID === activeBudget).map((be, index) => {
                         return (
                             <div key={index} className='be-row'>
@@ -439,6 +440,7 @@ const Budgets = () => {
                             </div>
                         )
                     })}
+                    </div>
                 </div>
             </div>
 
