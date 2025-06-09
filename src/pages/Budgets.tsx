@@ -261,6 +261,9 @@ const Budgets = () => {
                             >{b.title} <span>{b.emoji}</span></div>
                         )
                     })}
+                    <div className='b-nav' onClick={() => {setIsModalActive(!isModalActive)}}>
+                        <PlusIcon size={22} color="#4d69ff" strokeWidth={0.6}/>
+                    </div>
                 </div>
                 <div id='budgets-content'>
                     <div className='be-head'>
