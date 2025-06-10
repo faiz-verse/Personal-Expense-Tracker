@@ -32,11 +32,6 @@ const AddBudgetModal = ({ isModalActive, setIsModalActive, budgets, setBudgets }
     const [limit, setLimit] = useState<string>(''); // keep as string for input validation
     const [description, setDescription] = useState<string>('');
 
-    useEffect(() => {
-        const storedBudgets = JSON.parse(localStorage.getItem('budgets') || '[]');
-        setBudgets(storedBudgets);
-    }, []);
-
     const handleEmojiClick = (emojiData: EmojiClickData) => {
         setSelectedEmoji(emojiData.emoji);
         setShowPicker(false);
@@ -89,9 +84,7 @@ const AddBudgetModal = ({ isModalActive, setIsModalActive, budgets, setBudgets }
             description: description.trim(),
         };
 
-        const updatedBudgets = [...budgets, newBudget];
-        setBudgets(updatedBudgets);
-        localStorage.setItem('budgets', JSON.stringify(updatedBudgets));
+        setBudgets(prev => [...prev, newBudget]);
         alert('Budget added successfully!');
         setIsModalActive(false);
 

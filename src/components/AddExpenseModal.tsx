@@ -1,26 +1,53 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import './AddExpenseModal.css'
 
-interface Props{
-    isModalActive: boolean,
-    setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>
+interface budgetsModel {
+    UUID: string,
+    budgetUUID: string,
+    title: string,
+    emoji: string,
+    limit: number,
+    categories: string[],
+    description: string
 }
 
-const AddExpenseModal = ({isModalActive, setIsModalActive} : Props) => {
+interface budgetEntry {
+    entryUUID: string,
+    budgetUUID: string,
+    date: number,
+    category: string,
+    title: string,
+    description: string,
+    amount: number,
+    paymentStatus: string
+}
+
+interface Props {
+    isExpModalActive: boolean;
+    setIsExpModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+    budgets: budgetsModel[];
+    entries: budgetEntry[];
+    setEntries: React.Dispatch<React.SetStateAction<budgetEntry[]>>;
+}
+
+const AddExpenseModal = ({ isExpModalActive, setIsExpModalActive, budgets, entries, setEntries }: Props) => {
+
+    // submit logic
+
     return (
-        <div id='add-expense-overlay' style={{display: isModalActive? 'flex': 'hidden'}}>
+        <div id='add-expense-overlay' style={{ display: isExpModalActive ? 'flex' : 'hidden' }}>
             <div id="add-expense-modal">
                 <h2>Add a New Expense</h2>
                 <form>
                     <label>
                         Budget:
                         <select>
-                            <option>Main</option>
-                            <option>Budget 1</option>
-                            <option>Budget 2</option>
-                            <option>Budget 3</option>
-                            <option>Budget 4</option>
+                            {budgets.map((b, index) => {
+                                return (
+                                    <option value={b.budgetUUID}>{b.title}</option>
+                                );
+                            })}
                         </select>
                     </label>
 
@@ -65,7 +92,7 @@ const AddExpenseModal = ({isModalActive, setIsModalActive} : Props) => {
 
                     <div className="modal-buttons">
                         <button type="submit">Add Expense</button>
-                        <button type="button" onClick={()=> setIsModalActive(!isModalActive)}>Cancel</button>
+                        <button type="button" onClick={() => setIsExpModalActive(!isExpModalActive)}>Cancel</button>
                     </div>
                 </form>
             </div>

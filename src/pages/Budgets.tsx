@@ -53,176 +53,29 @@ const Budgets = () => {
     };
 
     // FOR BUDGET
-    const [budget, setBudget] = useState<budgetsModel[]>([
-        {
-            UUID: "userid",
-            budgetUUID: "all",
-            title: "All",
-            emoji: "👀",
-            limit: Infinity,
-            categories: [
-                "Food",
-                "Transport",
-                "Rent",
-                "Entertainment",
-                "Others"
-            ],
-            description: "This contains all the budgets"
-        },
-        {
-            UUID: "userid",
-            budgetUUID: "budgetid1",
-            title: "Budget 1",
-            emoji: "🍗",
-            limit: 10000,
-            categories: [
-                "budget 1 category 1",
-                "budget 1 category 2",
-                "budget 1 category 3",
-            ],
-            description: "blah blah blah budget 1"
-        },
-        {
-            UUID: "userid",
-            budgetUUID: "budgetid2",
-            title: "Budget 2",
-            emoji: "🏍",
-            limit: 10000,
-            categories: [
-                "budget 2 category 1",
-                "budget 2 category 2",
-                "budget 2 category 3",
-            ],
-            description: "blah blah blah budget 2"
-        },
-        {
-            UUID: "userid",
-            budgetUUID: "budgetid3",
-            title: "Budget 3",
-            emoji: "⛽",
-            limit: 10000,
-            categories: [
-                "budget 3 category 1",
-                "budget 3 category 2",
-                "budget 3 category 3",
-            ],
-            description: "blah blah blah budget 3"
-        }
-    ]);
-    const [activeBudget, setActiveBudget] = useState<string>(budget[0].budgetUUID)
+    const defaultAllBudget: budgetsModel = {
+        UUID: "userid",
+        budgetUUID: "all",
+        title: "All",
+        emoji: "👀",
+        limit: Infinity,
+        categories: ["Food", "Transport", "Rent", "Entertainment", "Others"],
+        description: "This contains all the budgets"
+    };
+    // user created budgets
+    const [userBudgets, setUserBudgets] = useState<budgetsModel[]>(() => {
+        const stored = localStorage.getItem("budgets");
+        return stored ? JSON.parse(stored) : [];
+    });
+    // This combines "All" + user budgets for UI
+    const budget = [defaultAllBudget, ...userBudgets];
 
-    const [budgetEntries, setBudgetEntries] = useState<budgetEntry[]>([
-        {
-            entryUUID: "entryid1",
-            budgetUUID: "budgetid1",
-            date: Date.now(),
-            category: "budget 1 category 1",
-            title: "Expense 1",
-            description: "blah blah blah expense 1 blah blah blah expense 1 blah blah blah",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid2",
-            budgetUUID: "budgetid3",
-            date: Date.now(),
-            category: "budget 3 category 1",
-            title: "Expense 2",
-            description: "blah blah blah expense 2",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid3",
-            budgetUUID: "budgetid2",
-            date: Date.now(),
-            category: "budget 2 category 2",
-            title: "Expense 3",
-            description: "blah blah blah expense 3",
-            amount: 3000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid4",
-            budgetUUID: "budgetid1",
-            date: Date.now(),
-            category: "budget 1 category 3",
-            title: "Expense 4",
-            description: "blah blah blah expense 4",
-            amount: 1000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid5",
-            budgetUUID: "budgetid1",
-            date: Date.now(),
-            category: "budget 1 category 1",
-            title: "Expense 5",
-            description: "blah blah blah expense 1",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid6",
-            budgetUUID: "budgetid3",
-            date: Date.now(),
-            category: "budget 3 category 1",
-            title: "Expense 6",
-            description: "blah blah blah expense 2",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid7",
-            budgetUUID: "budgetid2",
-            date: Date.now(),
-            category: "budget 2 category 2",
-            title: "Expense 7",
-            description: "blah blah blah expense 3",
-            amount: 3000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid8",
-            budgetUUID: "budgetid1",
-            date: Date.now(),
-            category: "budget 1 category 3",
-            title: "Expense 8",
-            description: "blah blah blah expense 4",
-            amount: 1000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid9",
-            budgetUUID: "budgetid1",
-            date: Date.now(),
-            category: "budget 1 category 1",
-            title: "Expense 9",
-            description: "blah blah blah expense 1",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid10",
-            budgetUUID: "budgetid3",
-            date: Date.now(),
-            category: "budget 3 category 1",
-            title: "Expense 10",
-            description: "blah blah blah expense 2",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-        {
-            entryUUID: "entryid11",
-            budgetUUID: "budgetid1",
-            date: 1752537600000, //July date just for test
-            category: "budget 1 category 1",
-            title: "Expense 11",
-            description: "blah blah blah expense 2",
-            amount: 2000,
-            paymentStatus: "paid"
-        },
-    ]);
+    const [activeBudget, setActiveBudget] = useState<string>("all")
+
+    const [budgetEntries, setBudgetEntries] = useState<budgetEntry[]>(() => {
+        const storedEntries = localStorage.getItem("budgetEntries");
+        return storedEntries ? JSON.parse(storedEntries) : [];
+    });
 
     const [isModalActive, setIsModalActive] = useState<boolean>(false);
     const [isExpModalActive, setIsExpModalActive] = useState<boolean>(false);
@@ -237,18 +90,10 @@ const Budgets = () => {
     const [editableRow, setEditableRow] = useState<string | null>(null);
     const [tempEditEntry, setTempEditEntry] = useState<any | null>(null);
 
-    // For getting and setting the budgets in the local storage to access in other pages/files
+    // for setting userBudgets
     useEffect(() => {
-        const storedBudgets = localStorage.getItem("budgets");
-        const storedEntries = localStorage.getItem("budgetEntries");
-
-        if (storedBudgets) setBudget(JSON.parse(storedBudgets));
-        if (storedEntries) setBudgetEntries(JSON.parse(storedEntries));
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem("budgets", JSON.stringify(budget));
-    }, [budget]);
+        localStorage.setItem("budgets", JSON.stringify(userBudgets));
+    }, [userBudgets]);
 
     useEffect(() => {
         localStorage.setItem("budgetEntries", JSON.stringify(budgetEntries));
@@ -272,8 +117,8 @@ const Budgets = () => {
             </div>
 
             {/* add budget modal */}
-            {!!isModalActive && <AddBudgetModal isModalActive={isModalActive} setIsModalActive={setIsModalActive} budgets={budget} setBudgets={setBudget} />}
-            {!!isExpModalActive && <AddExpenseModal isModalActive={isExpModalActive} setIsModalActive={setIsExpModalActive} />}
+            {!!isModalActive && <AddBudgetModal isModalActive={isModalActive} setIsModalActive={setIsModalActive} budgets={userBudgets} setBudgets={setUserBudgets} />}
+            {!!isExpModalActive && <AddExpenseModal isExpModalActive={isExpModalActive} setIsExpModalActive={setIsExpModalActive} budgets={budget} entries={budgetEntries} setEntries={setBudgetEntries} />}
 
             <div id='budget-container'>
                 <div id='budgets-nav'>
