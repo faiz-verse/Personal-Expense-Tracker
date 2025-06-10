@@ -157,7 +157,7 @@ const Budgets = () => {
 
                             return isInMonth && isMatchingBudget;
                         }).sort((a, b) => a.date - b.date).map((be, index) => {
-                            const isEditing = editableRow === be.entryUUID && activeBudget !== 'all'; // boolean to check entryUUID
+                            const isEditing = editableRow === be.entryUUID; // boolean to check entryUUID
                             return (
                                 <div
                                     key={index}
@@ -252,13 +252,12 @@ const Budgets = () => {
                                     )}
 
                                     {/* Buttons */}
-                                    { <div className='edit-del-btn'>
+                                    {((activeBudget !== "all") || (activeBudget === "all" && be.budgetUUID === "all")) && <div className='edit-del-btn'>
                                         {!isEditing && (
                                             <div
                                                 className='edit-btn'
                                                 onClick={() => {
                                                     setEditableRow(be.entryUUID);
-                                                    console.log(be.entryUUID)
                                                     setTempEditEntry({ ...be });
                                                 }}
                                             >
