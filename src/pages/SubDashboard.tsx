@@ -150,13 +150,12 @@ const SubDashboard = () => {
                                     <div className='budget-card-body'>
                                         <div>
                                             {b.description}<br></br>
-                                            Limit: &#8377;{b.limit}
                                         </div>
                                         <div>
                                             <CircularProgressbar
                                                 value={((b.limit - FindBudgetExpense(b, budgetEntries)) / b.limit) * 100}
                                                 text={`Available ₹${b.limit - FindBudgetExpense(b, budgetEntries)}`}
-                                                strokeWidth={8}
+                                                strokeWidth={6}
                                                 styles={buildStyles({
                                                     pathColor: "#02f7b4",
                                                     textColor: "black",
@@ -167,15 +166,10 @@ const SubDashboard = () => {
                                                 })}
                                             />
                                         </div>
-                                        <div>
-                                            <div>
-                                            <span>Spent</span>
-                                            <span>₹{FindBudgetExpense(b, budgetEntries)}</span>
-                                            </div>
-                                            <div>
-                                            <span>Available</span>
-                                            <span>₹{b.limit - FindBudgetExpense(b, budgetEntries)}</span>
-                                            </div>
+                                        <div className='scale'>
+                                            <p>Limit: <b>&#8377;{b.limit}</b></p>
+                                            <p>Spent: <b>₹{FindBudgetExpense(b, budgetEntries)}</b></p>
+                                            <p>Available: <b>₹{(b.limit - FindBudgetExpense(b, budgetEntries))}</b></p>
                                         </div>
                                     </div>
                                 </div>

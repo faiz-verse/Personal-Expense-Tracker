@@ -157,7 +157,7 @@
 }
 
 #sub-dashboard-right #sub-dashboard-right-top {
-    min-height: 310px;
+    min-height: 290px;
     width: 100%;
     position: relative;
     display: flex;
@@ -185,7 +185,7 @@
 }
 
 .budget-card {
-    height: 250px;
+    height: 230px;
     min-width: 300px;
     margin-right: 16px;
     background: #f9f9f9;
@@ -232,8 +232,8 @@
 }
 
 .budget-card .budget-card-body div:nth-child(2) {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     border: 1px solid rgb(190, 190, 190);
     display: flex;
@@ -245,9 +245,24 @@
     right: 15px;
 }
 
+.budget-card .budget-card-body .scale{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    width: 50%;
+}
+
+.budget-card .budget-card-body .scale p{
+    margin: 0;
+    font-size: 12px;
+    color: black;
+}
 
 #sub-dashboard-right #sub-dashboard-right-bottom {
-    min-height: 50%;
+    min-height: 53%;
     width: 100%;
     position: relative;
     display: flex;
