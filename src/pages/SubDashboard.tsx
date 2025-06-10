@@ -167,16 +167,16 @@ const SubDashboard = () => {
                                                 })}
                                             />
                                         </div>
-                                        {/* <div>
+                                        <div>
                                             <div>
                                             <span>Spent</span>
                                             <span>₹{FindBudgetExpense(b, budgetEntries)}</span>
                                             </div>
                                             <div>
                                             <span>Available</span>
-                                            <span>₹{FindBudgetExpense(b, budgetEntries)}</span>
+                                            <span>₹{b.limit - FindBudgetExpense(b, budgetEntries)}</span>
                                             </div>
-                                        </div> */}
+                                        </div>
                                     </div>
                                 </div>
                             )

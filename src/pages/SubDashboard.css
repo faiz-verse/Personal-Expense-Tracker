@@ -157,7 +157,7 @@
 }
 
 #sub-dashboard-right #sub-dashboard-right-top {
-    min-height: 40%;
+    min-height: 310px;
     width: 100%;
     position: relative;
     display: flex;
@@ -175,7 +175,6 @@
 #budget-cards {
     width: 100%;
     overflow-x: auto;
-    /* 'auto' is better than 'scroll' visually */
     display: flex;
     box-sizing: border-box;
     padding-bottom: 10px;
@@ -186,8 +185,8 @@
 }
 
 .budget-card {
-    height: 180px;
-    min-width: 250px;
+    height: 250px;
+    min-width: 300px;
     margin-right: 16px;
     background: #f9f9f9;
     border-radius: 10px;
@@ -233,8 +232,8 @@
 }
 
 .budget-card .budget-card-body div:nth-child(2) {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     border: 1px solid rgb(190, 190, 190);
     display: flex;
@@ -248,7 +247,7 @@
 
 
 #sub-dashboard-right #sub-dashboard-right-bottom {
-    min-height: 62.5%;
+    min-height: 50%;
     width: 100%;
     position: relative;
     display: flex;
