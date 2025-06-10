@@ -56,6 +56,21 @@ const Budgets = () => {
     const [budget, setBudget] = useState<budgetsModel[]>([
         {
             UUID: "userid",
+            budgetUUID: "all",
+            title: "All",
+            emoji: "👀",
+            limit: Infinity,
+            categories: [
+                "Food",
+                "Transport",
+                "Rent",
+                "Entertainment",
+                "Others"
+            ],
+            description: "This contains all the budgets"
+        },
+        {
+            UUID: "userid",
             budgetUUID: "budgetid1",
             title: "Budget 1",
             emoji: "🍗",
@@ -277,13 +292,16 @@ const Budgets = () => {
                     <div id='budgets-content-entries'>
                         {budgetEntries.filter((be) => {
                             const beDate = new Date(be.date);
-                            return (
-                                be.budgetUUID === activeBudget &&
+                            const isInMonth =
                                 beDate.getMonth() === currentMonth.getMonth() &&
-                                beDate.getFullYear() === currentMonth.getFullYear()
-                            );
-                        }).map((be, index) => {
-                            const isEditing = editableRow === be.entryUUID; // boolean to check entryUUID
+                                beDate.getFullYear() === currentMonth.getFullYear();
+
+                            const isMatchingBudget =
+                                activeBudget === "all" || be.budgetUUID === activeBudget;
+
+                            return isInMonth && isMatchingBudget;
+                        }).sort((a, b) => a.date - b.date).map((be, index) => {
+                            const isEditing = editableRow === be.entryUUID && activeBudget !== 'all'; // boolean to check entryUUID
                             return (
                                 <div
                                     key={index}
@@ -374,11 +392,11 @@ const Budgets = () => {
                                             <option value='pending'>pending</option>
                                         </select>
                                     ) : (
-                                        <input type='text' style={{color: be.paymentStatus === 'paid'? 'palegreen' : 'tomato'}} value={be.paymentStatus} className='be-cell' readOnly />
+                                        <input type='text' style={{ color: be.paymentStatus === 'paid' ? 'palegreen' : 'tomato' }} value={be.paymentStatus} className='be-cell' readOnly />
                                     )}
 
                                     {/* Buttons */}
-                                    <div className='edit-del-btn'>
+                                    {activeBudget !== 'all' && <div className='edit-del-btn'>
                                         {!isEditing && (
                                             <div
                                                 className='edit-btn'
@@ -430,20 +448,23 @@ const Budgets = () => {
                                                 <DeleteIcon size={16} color='tomato' />
                                             </div>
                                         )}
-                                    </div>
+                                    </div>}
                                 </div>
                             );
                         })}
                         {/* If no entries */}
                         {budgetEntries.filter((be) => {
                             const beDate = new Date(be.date);
-                            return (
-                                be.budgetUUID === activeBudget &&
+                            const isInMonth =
                                 beDate.getMonth() === currentMonth.getMonth() &&
-                                beDate.getFullYear() === currentMonth.getFullYear()
-                            );
+                                beDate.getFullYear() === currentMonth.getFullYear();
+
+                            const isMatchingBudget =
+                                activeBudget === "all" || be.budgetUUID === activeBudget;
+
+                            return isInMonth && isMatchingBudget;
                         }).length < 1 && <div style={{ fontSize: '12px', margin: '10px 15px' }}>No Entries Found</div>}
-                        
+
                     </div>
                 </div>
             </div>

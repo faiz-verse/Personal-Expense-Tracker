@@ -117,7 +117,7 @@
     position: relative;
 }
 
-#budget-container #budgets-nav .b-nav:last-child{
+#budget-container #budgets-nav .b-nav:last-child {
     all: unset;
     display: flex;
     align-items: center;
@@ -131,13 +131,13 @@
     cursor: pointer;
 }
 
-#budget-container #budgets-nav .b-nav span{
+#budget-container #budgets-nav .b-nav span {
     font-size: 16px;
 }
 
 #budget-container #budgets-content {
     background: #f9f9f9;
-    height: calc(100% - 60px);
+    height: calc(100% - 70px);
     border-radius: 0px 10px 10px 10px;
     display: flex;
     flex-direction: column;
@@ -247,7 +247,7 @@
     margin-right: 10px;
 }
 
-#budget-container #budgets-content .be-row .edit-del-btn{
+#budget-container #budgets-content .be-row .edit-del-btn {
     width: fit-content;
     display: flex;
     align-items: center;
