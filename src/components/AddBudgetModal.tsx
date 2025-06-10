@@ -1,6 +1,6 @@
 import React, { useState, KeyboardEvent, ChangeEvent, useEffect } from 'react';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
-import { v4 as uuidv4 } from 'uuid'; // install with: npm install uuid
+import { v4 as uuidv4 } from 'uuid';
 
 import './AddBudgetModal.css';
 

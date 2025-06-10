@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid';
 
 import './AddExpenseModal.css'
 
@@ -34,52 +35,113 @@ interface Props {
 const AddExpenseModal = ({ isExpModalActive, setIsExpModalActive, budgets, entries, setEntries }: Props) => {
 
     // submit logic
+    const [selectedBudget, setSelectedBudget] = useState<string>(budgets[0]?.budgetUUID || '');
+    const [date, setDate] = useState<string>('');
+    const [category, setCategory] = useState<string>('Food');
+    const [title, setTitle] = useState<string>('');
+    const [amount, setAmount] = useState<string>('');
+    const [paymentStatus, setPaymentStatus] = useState<string>('Paid');
+    const [description, setDescription] = useState<string>('');
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (!selectedBudget || !date || !category || !title.trim() || !amount.trim()) {
+            alert('Please fill all required fields.');
+            return;
+        }
+
+        const numericAmount = Number(amount);
+        if (isNaN(numericAmount) || numericAmount <= 0) {
+            alert('Amount must be a positive number.');
+            return;
+        }
+
+        const newEntry: budgetEntry = {
+            entryUUID: uuidv4(),
+            budgetUUID: selectedBudget,
+            date: new Date(date).getTime(),
+            category: category.trim(),
+            title: title.trim(),
+            description: description.trim(),
+            amount: numericAmount,
+            paymentStatus: paymentStatus.toLowerCase(),
+        };
+
+        setEntries([...entries, newEntry]);
+        setIsExpModalActive(false);
+
+        // Reset fields
+        setSelectedBudget(budgets[0]?.budgetUUID || '');
+        setDate('');
+        setCategory('');
+        setTitle('');
+        setAmount('');
+        setPaymentStatus('Paid');
+        setDescription('');
+    };
 
     return (
-        <div id='add-expense-overlay' style={{ display: isExpModalActive ? 'flex' : 'hidden' }}>
+        <div id='add-expense-overlay' style={{ display: isExpModalActive ? 'flex' : 'none' }}>
             <div id="add-expense-modal">
                 <h2>Add a New Expense</h2>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <label>
                         Budget:
-                        <select>
-                            {budgets.map((b, index) => {
-                                return (
-                                    <option value={b.budgetUUID}>{b.title}</option>
-                                );
-                            })}
+                        <select value={selectedBudget} onChange={(e) => setSelectedBudget(e.target.value)}>
+                            {budgets.map((b, index) => (
+                                <option key={index} value={b.budgetUUID}>
+                                    {b.title}
+                                </option>
+                            ))}
                         </select>
                     </label>
 
                     <label>
                         Date:
-                        <input type="date" />
+                        <input
+                            type="date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                        />
                     </label>
 
                     <label>
                         Category:
-                        <select>
-                            <option>Food</option>
-                            <option>Transport</option>
-                            <option>Rent</option>
-                            <option>Entertainment</option>
-                            <option>Others</option>
+                        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                            { budgets.find((b) => b.budgetUUID === selectedBudget)?.categories.map((cat, idx) => (
+                                        <option key={idx} value={cat}>
+                                            {cat}
+                                        </option>
+                                    )
+                                )
+                            }
                         </select>
                     </label>
 
                     <label>
                         Title:
-                        <input type="text" placeholder="e.g. Grocery shopping" />
+                        <input
+                            type="text"
+                            placeholder="e.g. Grocery shopping"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
                     </label>
 
                     <label>
                         Amount (₹):
-                        <input type="number" placeholder="e.g. 1500" />
+                        <input
+                            type="number"
+                            placeholder="e.g. 1500"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                        />
                     </label>
 
                     <label>
                         Payment Status:
-                        <select>
+                        <select value={paymentStatus} onChange={(e) => setPaymentStatus(e.target.value)}>
                             <option>Paid</option>
                             <option>Pending</option>
                         </select>
@@ -87,18 +149,21 @@ const AddExpenseModal = ({ isExpModalActive, setIsExpModalActive, budgets, entri
 
                     <label>
                         Description:
-                        <textarea placeholder="Add optional notes..." />
+                        <textarea
+                            placeholder="Add optional notes..."
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
                     </label>
 
                     <div className="modal-buttons">
                         <button type="submit">Add Expense</button>
-                        <button type="button" onClick={() => setIsExpModalActive(!isExpModalActive)}>Cancel</button>
+                        <button type="button" onClick={() => setIsExpModalActive(false)}>Cancel</button>
                     </div>
                 </form>
             </div>
-
         </div>
-    )
+    );
 }
 
 export default AddExpenseModal
