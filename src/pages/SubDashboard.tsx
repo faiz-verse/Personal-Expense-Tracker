@@ -76,6 +76,15 @@ const SubDashboard = () => {
         localStorage.setItem("budgetEntries", JSON.stringify(budgetEntries));
     }, [budgetEntries]);
 
+    const FindBudgetExpense = (budget: budgetsModel, userEntries: budgetEntry[]) => {
+        let sumExpense = 0;
+        const allExpenses = userEntries.filter((entry) => entry.budgetUUID === budget.budgetUUID)
+        allExpenses.forEach((exp) => {
+            sumExpense = sumExpense + exp.amount
+        })
+        return sumExpense;
+    }
+
     return (
         <div id='sub-dashboard'>
             <div id='sub-dashboard-left'>
@@ -131,10 +140,47 @@ const SubDashboard = () => {
                 <div id='sub-dashboard-right-top'>
                     <span>Your Current Budgets</span>
                     <div id='budget-cards'>
-                        <div className="budget-card"></div>
-                        <div className="budget-card"></div>
-                        <div className="budget-card"></div>
-                        <div className="budget-card"></div>
+                        {userBudgets.map((b, index) => {
+                            return (
+                                <div className="budget-card">
+                                    <div className='budget-card-head'>
+                                        <div>{b.title}</div>
+                                        <div>{b.emoji}</div>
+                                    </div>
+                                    <div className='budget-card-body'>
+                                        <div>
+                                            {b.description}<br></br>
+                                            Limit: &#8377;{b.limit}
+                                        </div>
+                                        <div>
+                                            <CircularProgressbar
+                                                value={((b.limit - FindBudgetExpense(b, budgetEntries)) / b.limit) * 100}
+                                                text={`Available ₹${b.limit - FindBudgetExpense(b, budgetEntries)}`}
+                                                strokeWidth={8}
+                                                styles={buildStyles({
+                                                    pathColor: "#02f7b4",
+                                                    textColor: "black",
+                                                    trailColor: "#4d69ff",
+                                                    textSize: "8px",
+                                                    strokeLinecap: "straight",
+                                                    pathTransitionDuration: 0.5,
+                                                })}
+                                            />
+                                        </div>
+                                        {/* <div>
+                                            <div>
+                                            <span>Spent</span>
+                                            <span>₹{FindBudgetExpense(b, budgetEntries)}</span>
+                                            </div>
+                                            <div>
+                                            <span>Available</span>
+                                            <span>₹{FindBudgetExpense(b, budgetEntries)}</span>
+                                            </div>
+                                        </div> */}
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
                 <div id='sub-dashboard-right-bottom'>
