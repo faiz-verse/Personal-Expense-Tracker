@@ -272,7 +272,7 @@ const Budgets = () => {
             </div>
 
             {/* add budget modal */}
-            {!!isModalActive && <AddBudgetModal isModalActive={isModalActive} setIsModalActive={setIsModalActive} />}
+            {!!isModalActive && <AddBudgetModal isModalActive={isModalActive} setIsModalActive={setIsModalActive} budgets={budget} setBudgets={setBudget} />}
             {!!isExpModalActive && <AddExpenseModal isModalActive={isExpModalActive} setIsModalActive={setIsExpModalActive} />}
 
             <div id='budget-container'>

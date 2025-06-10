@@ -1,29 +1,46 @@
-import React, { useState, KeyboardEvent, ChangeEvent } from 'react'
-
-// for emoji picker
+import React, { useState, KeyboardEvent, ChangeEvent, useEffect } from 'react';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
+import { v4 as uuidv4 } from 'uuid'; // install with: npm install uuid
 
-import './AddBudgetModal.css'
+import './AddBudgetModal.css';
 
-interface Props {
-    isModalActive: boolean,
-    setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>
+interface Budget {
+    UUID: string;
+    budgetUUID: string;
+    title: string;
+    emoji: string;
+    limit: number;
+    categories: string[];
+    description: string;
 }
 
-const AddBudgetModal = ({ isModalActive, setIsModalActive }: Props) => {
+interface Props {
+    isModalActive: boolean;
+    setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+    budgets: Budget[];
+    setBudgets: React.Dispatch<React.SetStateAction<Budget[]>>;
+}
 
-    // Emoji Picker
+const AddBudgetModal = ({ isModalActive, setIsModalActive, budgets, setBudgets }: Props) => {
+
+    // form state
     const [selectedEmoji, setSelectedEmoji] = useState<string>('');
     const [showPicker, setShowPicker] = useState<boolean>(false);
+    const [tags, setTags] = useState<string[]>([]);
+    const [input, setInput] = useState<string>('');
+    const [title, setTitle] = useState<string>('');
+    const [limit, setLimit] = useState<string>(''); // keep as string for input validation
+    const [description, setDescription] = useState<string>('');
+
+    useEffect(() => {
+        const storedBudgets = JSON.parse(localStorage.getItem('budgets') || '[]');
+        setBudgets(storedBudgets);
+    }, []);
 
     const handleEmojiClick = (emojiData: EmojiClickData) => {
         setSelectedEmoji(emojiData.emoji);
         setShowPicker(false);
     };
-
-    // Add Tag Area
-    const [tags, setTags] = useState<string[]>([]);
-    const [input, setInput] = useState<string>('');
 
     const addTag = () => {
         const trimmed = input.trim();
@@ -48,14 +65,58 @@ const AddBudgetModal = ({ isModalActive, setIsModalActive }: Props) => {
         setInput(e.target.value);
     };
 
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (!title.trim() || !selectedEmoji || tags.length === 0 || !limit.trim() || !description.trim()) {
+            alert('Please fill out all fields.');
+            return;
+        }
+
+        const parsedLimit = Number(limit);
+        if (isNaN(parsedLimit) || parsedLimit < 100) {
+            alert('Limit should be a number greater than or equal to 100.');
+            return;
+        }
+
+        const newBudget: Budget = {
+            UUID: "userid",
+            budgetUUID: uuidv4(),
+            title: title.trim(),
+            emoji: selectedEmoji,
+            limit: parsedLimit,
+            categories: tags,
+            description: description.trim(),
+        };
+
+        const updatedBudgets = [...budgets, newBudget];
+        setBudgets(updatedBudgets);
+        localStorage.setItem('budgets', JSON.stringify(updatedBudgets));
+        alert('Budget added successfully!');
+        setIsModalActive(false);
+
+        // reset form
+        setTitle('');
+        setSelectedEmoji('');
+        setTags([]);
+        setInput('');
+        setLimit('');
+        setDescription('');
+    };
+
     return (
-        <div id='add-budget-overlay' style={{ display: isModalActive ? 'flex' : 'hidden' }}>
+        <div id='add-budget-overlay' style={{ display: isModalActive ? 'flex' : 'none' }}>
             <div id="add-budget-modal">
                 <h2>Add a New Budget</h2>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <label>
                         Title:
-                        <input type="text" placeholder="e.g. Bike expenses" />
+                        <input
+                            type="text"
+                            placeholder="e.g. Bike expenses"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
                     </label>
 
                     <label>
@@ -68,14 +129,13 @@ const AddBudgetModal = ({ isModalActive, setIsModalActive }: Props) => {
                                 placeholder="Click emoji icon to pick"
                                 readOnly
                             />
-
-                            <button id='emoji-button'
+                            <button
+                                id='emoji-button'
                                 type="button"
                                 onClick={() => setShowPicker(!showPicker)}
                             >
                                 😊
                             </button>
-
                             {showPicker && (
                                 <div id='picker' style={{ marginTop: '20px', display: 'inline-block' }}>
                                     <EmojiPicker onEmojiClick={handleEmojiClick} />
@@ -86,11 +146,16 @@ const AddBudgetModal = ({ isModalActive, setIsModalActive }: Props) => {
 
                     <label>
                         Limit (₹):
-                        <input type="number" placeholder="e.g. 9999" />
+                        <input
+                            type="number"
+                            placeholder="e.g. 9999"
+                            value={limit}
+                            onChange={(e) => setLimit(e.target.value)}
+                        />
                     </label>
 
                     <label>
-                        Category (create categories):                        
+                        Category (create categories):
                     </label>
                     <div
                         style={{
@@ -145,18 +210,21 @@ const AddBudgetModal = ({ isModalActive, setIsModalActive }: Props) => {
 
                     <label>
                         Description:
-                        <textarea placeholder="Add optional notes..." />
+                        <textarea
+                            placeholder="Add optional notes..."
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
                     </label>
 
                     <div className="modal-buttons">
                         <button type="submit">Add Budget</button>
-                        <button type="button" onClick={() => setIsModalActive(!isModalActive)}>Cancel</button>
+                        <button type="button" onClick={() => setIsModalActive(false)}>Cancel</button>
                     </div>
                 </form>
             </div>
-
         </div>
-    )
-}
+    );
+};
 
-export default AddBudgetModal
+export default AddBudgetModal;
