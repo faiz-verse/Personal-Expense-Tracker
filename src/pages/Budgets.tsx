@@ -252,12 +252,13 @@ const Budgets = () => {
                                     )}
 
                                     {/* Buttons */}
-                                    {activeBudget !== 'all' && <div className='edit-del-btn'>
+                                    { <div className='edit-del-btn'>
                                         {!isEditing && (
                                             <div
                                                 className='edit-btn'
                                                 onClick={() => {
                                                     setEditableRow(be.entryUUID);
+                                                    console.log(be.entryUUID)
                                                     setTempEditEntry({ ...be });
                                                 }}
                                             >
@@ -282,7 +283,7 @@ const Budgets = () => {
                                                 </div>
 
                                                 <div
-                                                    className='tick-btn'
+                                                    className='cross-btn'
                                                     onClick={() => {
                                                         setEditableRow(null);
                                                         setTempEditEntry(null);
