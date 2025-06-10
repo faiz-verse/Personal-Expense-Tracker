@@ -111,12 +111,6 @@ const Budgets = () => {
     ]);
     const [activeBudget, setActiveBudget] = useState<string>(budget[0].budgetUUID)
 
-    // const handleAddBudget = (budget: budgetsModel, budgets: budgetsModel[], setBudget: React.Dispatch<React.SetStateAction<budgetsModel[]>>) => {
-    //     if(budget){
-    //         setBudget([... budgets, budget])
-    //     }
-    // }
-
     const [budgetEntries, setBudgetEntries] = useState<budgetEntry[]>([
         {
             entryUUID: "entryid1",
@@ -242,6 +236,23 @@ const Budgets = () => {
     // For editable rows
     const [editableRow, setEditableRow] = useState<string | null>(null);
     const [tempEditEntry, setTempEditEntry] = useState<any | null>(null);
+
+    // For getting and setting the budgets in the local storage to access in other pages/files
+    useEffect(() => {
+        const storedBudgets = localStorage.getItem("budgets");
+        const storedEntries = localStorage.getItem("budgetEntries");
+
+        if (storedBudgets) setBudget(JSON.parse(storedBudgets));
+        if (storedEntries) setBudgetEntries(JSON.parse(storedEntries));
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("budgets", JSON.stringify(budget));
+    }, [budget]);
+
+    useEffect(() => {
+        localStorage.setItem("budgetEntries", JSON.stringify(budgetEntries));
+    }, [budgetEntries]);
 
     return (
         <div id='budgets'>
