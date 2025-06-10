@@ -129,7 +129,16 @@ const Budgets = () => {
                                     background: activeBudget === b.budgetUUID ? '#f9f9f9' : 'transparent',
                                     fontWeight: activeBudget === b.budgetUUID ? '600' : '400'
                                 }}
-                            >{b.title} <span>{b.emoji}</span></div>
+                            >{b.title} <span>{b.emoji}</span>
+                                {(activeBudget === b.budgetUUID && activeBudget !== "all") ?
+                                    <DeleteIcon size={16} color='tomato' onClick={() => {
+                                        const confirmed = window.confirm("Are you sure you want to delete this budget?");
+                                        if (confirmed) {
+                                            const updatedBudgets = userBudgets.filter(budget => budget.budgetUUID !== activeBudget);
+                                            setUserBudgets(updatedBudgets);
+                                        }
+                                    }} /> : ''}
+                            </div>
                         )
                     })}
                     <div className='b-nav' onClick={() => { setIsModalActive(!isModalActive) }}>
