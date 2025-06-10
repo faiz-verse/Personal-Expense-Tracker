@@ -370,11 +370,11 @@ const Budgets = () => {
                                             value={tempEditEntry?.paymentStatus || ''}
                                             onChange={(e) => setTempEditEntry({ ...tempEditEntry, paymentStatus: e.target.value })}
                                         >
-                                            <option value='paid'>Paid</option>
-                                            <option value='pending'>Pending</option>
+                                            <option value='paid'>paid</option>
+                                            <option value='pending'>pending</option>
                                         </select>
                                     ) : (
-                                        <input type='text' value={be.paymentStatus} className='be-cell' readOnly />
+                                        <input type='text' style={{color: be.paymentStatus === 'paid'? 'palegreen' : 'tomato'}} value={be.paymentStatus} className='be-cell' readOnly />
                                     )}
 
                                     {/* Buttons */}
