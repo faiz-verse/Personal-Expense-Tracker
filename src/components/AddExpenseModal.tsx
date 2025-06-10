@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 import './AddExpenseModal.css'
@@ -37,11 +37,20 @@ const AddExpenseModal = ({ isExpModalActive, setIsExpModalActive, budgets, entri
     // submit logic
     const [selectedBudget, setSelectedBudget] = useState<string>(budgets[0]?.budgetUUID || '');
     const [date, setDate] = useState<string>('');
-    const [category, setCategory] = useState<string>('Food');
+    const [category, setCategory] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [amount, setAmount] = useState<string>('');
     const [paymentStatus, setPaymentStatus] = useState<string>('Paid');
     const [description, setDescription] = useState<string>('');
+
+    useEffect(() => {
+        const budget = budgets.find(b => b.budgetUUID === selectedBudget);
+        if (budget && budget.categories.length > 0) {
+            setCategory(budget.categories[0]); // set first category as default
+        } else {
+            setCategory('');
+        }
+    }, [selectedBudget, budgets]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -108,13 +117,13 @@ const AddExpenseModal = ({ isExpModalActive, setIsExpModalActive, budgets, entri
 
                     <label>
                         Category:
-                        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                            { budgets.find((b) => b.budgetUUID === selectedBudget)?.categories.map((cat, idx) => (
+                        <select value={category} onChange={(e) => setCategory(e.target.value)} >
+                            { budgets.find((b) => b.budgetUUID === selectedBudget)
+                                    ?.categories.map((cat, idx) => (
                                         <option key={idx} value={cat}>
                                             {cat}
                                         </option>
-                                    )
-                                )
+                                    ))
                             }
                         </select>
                     </label>
