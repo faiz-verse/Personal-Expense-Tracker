@@ -206,17 +206,26 @@ const SubDashboard = () => {
                 <div id='sub-dashboard-right-bottom'>
                     <span>Your Expenses</span>
                     <div id='expenses'>
-                        <div id='expense-head'></div>
-                        <div className="expense"></div>
-                        <div className="expense"></div>
-                        <div className="expense"></div>
-                        <div className="expense"></div>
-                        <div className="expense"></div>
-                        <div className="expense"></div>
-                        <div className="expense"></div>
-                        <div className="expense"></div>
-                        <div className="expense"></div>
-                        <div className="expense"></div>
+                        <div id='expense-head'>
+                            <div className='e-head'>Date</div>
+                            <div className='e-head'>Category</div>
+                            <div className='e-head'>Title</div>
+                            <div className='e-head'>Amount</div>
+                            <div className='e-head'>Status</div>
+                        </div>
+
+                        {budgetEntries.filter((be) => be.paymentStatus.toLocaleLowerCase() === "paid").reverse().map((be, index) => {
+                            return (
+                                <div className="expense">
+                                    <div className='e-row'>{new Date(be.date).toLocaleDateString()}</div>
+                                    <div className='e-row'>{be.category}</div>
+                                    <div className='e-row'>{be.title}</div>
+                                    <div className='e-row'>{be.amount}</div>
+                                    <div className='e-row'>{be.paymentStatus}</div>
+                                </div>
+                            );
+                        })}
+
                     </div>
                 </div>
             </div>
