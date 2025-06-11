@@ -46,7 +46,7 @@
     color: gray;
 }
 
-#all-expenses #expenses{
+#all-expenses #expenses {
     height: 100%;
     width: 100%;
     /* border: 2px solid red; */
@@ -64,18 +64,102 @@
     position: relative;
 }
 
-#all-expenses #expenses #expense-head{
+#all-expenses #expenses #expense-head {
     min-height: 50px;
     width: 100%;
     background: #cffff2;
     border-radius: 5px;
     position: sticky;
     top: 0%;
+    z-index: 10;
+
+    box-sizing: border-box;
+    padding: 0px 20px;
+
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 20px;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: gray;
 }
 
-#all-expenses #expenses .expense{
+#all-expenses #expenses #expense-head .e-head:nth-child(1) {
+    width: 15%;
+}
+
+#all-expenses #expenses #expense-head .e-head:nth-child(2) {
+    width: 25%;
+}
+
+#all-expenses #expenses #expense-head .e-head:nth-child(3) {
+    width: 30%;
+}
+
+#all-expenses #expenses #expense-head .e-head:nth-child(4) {
+    width: 15%;
+}
+
+#all-expenses #expenses #expense-head .e-head:nth-child(5) {
+    width: 10%;
+}
+
+
+#all-expenses #expenses .expense {
     min-height: 50px;
     width: 100%;
-    background: #e7eaff;
+    background: #f9f9f9;
     border-radius: 5px;
+
+    box-sizing: border-box;
+    padding: 0px 20px;
+
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 20px;
+    align-items: center;
+    font-size: 12px;
+}
+
+#all-expenses #expenses .expense .e-row {
+    mask-image: linear-gradient(to right, black 90%, transparent);
+    overflow: hidden;
+}
+
+#all-expenses #expenses .expense .e-row:nth-child(1) {
+    width: 15%;
+}
+
+#all-expenses #expenses .expense .e-row:nth-child(2) {
+    width: 25%;
+}
+
+#all-expenses #expenses .expense .e-row:nth-child(3) {
+    width: 30%;
+}
+
+#all-expenses #expenses .expense .e-row:nth-child(4) {
+    width: 15%;
+}
+
+#all-expenses #expenses .expense .e-row:nth-child(5) {
+    width: 10%;
+    box-sizing: border-box;
+    padding-left: 18px;
+    mask-image: none;
+    position: relative;
+    overflow: visible;
+
+}
+
+#all-expenses #expenses .expense .e-row:nth-child(5)::before {
+    content: '';
+    height: 10px;
+    width: 10px;
+    background: palegreen;
+    border-radius: 50px;
+    position: absolute;
+    left: 0px;
+    top: 5px;
 }
