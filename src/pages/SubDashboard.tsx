@@ -15,6 +15,7 @@ import "react-circular-progressbar/dist/styles.css";
 import './SubDashboard.css'
 
 import AddExpenseModal from '../components/AddExpenseModal';
+import AddBudgetModal from '../components/AddBudgetModal';
 
 // importing context hook to use the context
 import { useActiveBudgetContext } from '../context/DashboardContext';
@@ -52,6 +53,7 @@ const SubDashboard = () => {
     const [balanceSpent, setBalanceSpent] = useState<number>(14000)
 
     const [isExpModalActive, setIsExpModalActive] = useState<boolean>(false);
+    const [isModalActive, setIsModalActive] = useState<boolean>(false);
 
     // FOR BUDGET
     const defaultAllBudget: budgetsModel = {
@@ -200,12 +202,16 @@ const SubDashboard = () => {
                             )
                         })}
                     </div> :
-                        <span>No Added Budgets</span>
+                        <div id='no-budget-notifier'>
+                            <span>No added budgets</span>
+                            <p>You can also create your own custom budgets to keep track of specific types of expenses, such as groceries, travel, entertainment, or utilities. This helps you organize your spending and stay within your financial goals more easily.</p>
+                            <button id='add-budget' onClick={() => { setIsModalActive(!isModalActive) }}><PlusIcon size={18} color="#4d69ff" strokeWidth={1} />Add a New Budget</button>
+                        </div>
                     }
                 </div>
                 <div id='sub-dashboard-right-bottom'>
                     <span>Your Expenses</span>
-                    <div id='expenses'>
+                    {budgetEntries.length > 0 ? <div id='expenses'>
                         <div id='expense-head'>
                             <div className='e-head'>Date</div>
                             <div className='e-head'>Category</div>
@@ -221,17 +227,24 @@ const SubDashboard = () => {
                                     <div className='e-row'>{be.category}</div>
                                     <div className='e-row'>{be.title}</div>
                                     <div className='e-row'>{be.amount}</div>
-                                    <div className='e-row' style={{color: 'palegreen'}}>{be.paymentStatus}</div>
+                                    <div className='e-row' style={{ color: 'palegreen' }}>{be.paymentStatus}</div>
                                 </div>
                             );
                         })}
 
-                    </div>
+                    </div> :
+                        <div>
+                        <span>No expenses yet!</span>
+                        <p>You haven't added any expenses yet. Start by adding your first expense — it will be automatically categorized under the default 'All' budget unless you choose a specific one.</p>
+                        </div>
+                    }
+
                 </div>
             </div>
 
-            {/* add expense modal */}
+            {/* add expense and add budget modal */}
             {!!isExpModalActive && <AddExpenseModal isExpModalActive={isExpModalActive} setIsExpModalActive={setIsExpModalActive} budgets={budget} entries={budgetEntries} setEntries={setBudgetEntries} />}
+            {!!isModalActive && <AddBudgetModal isModalActive={isModalActive} setIsModalActive={setIsModalActive} budgets={userBudgets} setBudgets={setUserBudgets} />}
         </div>
     )
 }
