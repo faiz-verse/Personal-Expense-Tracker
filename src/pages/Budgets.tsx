@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { IconBaseProps } from "react-icons";
 import { BsChevronLeft, BsChevronRight, BsPlusLg, BsPencilSquare, BsTrash3Fill, BsCheckLg } from "react-icons/bs";
 
@@ -6,6 +6,9 @@ import './Budgets.css'
 
 import AddBudgetModal from '../components/AddBudgetModal';
 import AddExpenseModal from '../components/AddExpenseModal';
+
+// importing context hook to use the context
+import { useActiveBudgetContext } from '../context/DashboardContext';
 
 interface budgetsModel {
     UUID: string,
@@ -70,7 +73,9 @@ const Budgets = () => {
     // This combines "All" + user budgets for UI
     const budget = [defaultAllBudget, ...userBudgets];
 
-    const [activeBudget, setActiveBudget] = useState<string>("all")
+    // const [activeBudget, setActiveBudget] = useState<string>("all")
+    // const activeBudget = useContext(activeBudgetContext)
+    const { activeBudget, setActiveBudget } = useActiveBudgetContext();
 
     const [budgetEntries, setBudgetEntries] = useState<budgetEntry[]>(() => {
         const storedEntries = localStorage.getItem("budgetEntries");
