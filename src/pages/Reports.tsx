@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import './Reports.css';
 
-// For Line Chart
+// For Line And Pie Chart
 // Import this block in your Reports.tsx
 import {
     Chart as ChartJS,
@@ -28,21 +28,59 @@ ChartJS.register(
     Legend
 );
 
-// For Line chart (sample dataset)
-const expenses = [
-    { label: "Jan", expenses: 8880, savings: 1000 },
-    { label: "Feb", expenses: 7920, savings: 1500 },
-    { label: "Mar", expenses: 9300, savings: 1200 },
-    { label: "Apr", expenses: 8500, savings: 1600 },
-    { label: "May", expenses: 9100, savings: 1800 },
-    { label: "Jun", expenses: 8700, savings: 1400 },
-    { label: "Jul", expenses: 9400, savings: 1300 },
-    { label: "Aug", expenses: 8900, savings: 1700 },
-    { label: "Sep", expenses: 9100, savings: 1500 },
-    { label: "Oct", expenses: 8800, savings: 2000 },
-    { label: "Nov", expenses: 9200, savings: 1900 },
-    { label: "Dec", expenses: 9500, savings: 2100 },
-];
+// Interface for the budgetEntries
+interface budgetEntry {
+    entryUUID: string,
+    budgetUUID: string,
+    date: number,
+    category: string,
+    title: string,
+    description: string,
+    amount: number,
+    paymentStatus: string
+}
+
+// FOR GETTING BUDGET
+const storedEntries = localStorage.getItem("budgetEntries");
+const storedBalances = localStorage.getItem("monthlyBalances");
+const budgetEntries: budgetEntry[] = storedEntries ? JSON.parse(storedEntries) : [];
+
+// For Line chart (converting to required structure)
+const monthlyBalances: { month: number; year: number; balance: number }[] = storedBalances ? JSON.parse(storedBalances) : [];
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+// function to convert the budgetEntries to the required structured dataset
+const buildMonthlyExpenseData = (
+
+    entries: budgetEntry[],
+    balances: { month: number; year: number; balance: number }[]
+) => {
+    const result = Array.from({ length: 12 }, (_, i) => ({
+        label: monthNames[i],
+        expenses: 0,
+        savings: 0,
+    }));
+
+    // Add up expenses for each month
+    entries.forEach((entry) => {
+        if (entry.paymentStatus.toLowerCase() !== "paid") return;
+
+        const date = new Date(entry.date);
+        const month = date.getMonth();
+        result[month].expenses += entry.amount;
+    });
+
+    // Add savings per month using monthlyBalances
+    balances.forEach(({ month, balance }) => {
+        const expensesForMonth = result[month].expenses;
+        result[month].savings = Math.max(balance - expensesForMonth, 0);
+    });
+
+    return result;
+};
+const expenses = buildMonthlyExpenseData(budgetEntries, monthlyBalances);
+// console.log(expensesData); // 🎯 Final data ready for chart!
+// options for the line graph
 const options = {
     responsive: true,
     plugins: {
@@ -76,15 +114,31 @@ const options = {
 };
 
 // For Pie Chart
-const PieChartData = [
-    { category: "Shopping", expense: 1000 },
-    { category: "Chicken", expense: 3000 },
-    { category: "Rent", expense: 2500 },
-    { category: "Transport", expense: 1000 },
-    { category: "Petrol", expense: 4000 },
-    { category: "Education", expense: 5000 },
-    { category: "Bike Maintainance", expense: 2000 },
-]
+// function to convert the budgetEntries to the required structured dataset
+const buildPieChartData = (entries: budgetEntry[]) => {
+    const categoryMap: { [category: string]: number } = {};
+
+    entries.forEach((entry) => {
+        if (entry.paymentStatus.toLowerCase() !== "paid") return;
+
+        const cat = entry.category.trim();
+        if (categoryMap[cat]) {
+            categoryMap[cat] += entry.amount;
+        } else {
+            categoryMap[cat] = entry.amount;
+        }
+    });
+
+    const pieData = Object.entries(categoryMap).map(([category, expense]) => ({
+        category,
+        expense,
+    }));
+
+    return pieData;
+};
+const PieChartData = buildPieChartData(budgetEntries);
+// console.log(PieChartData); // 🥧 Final pie data ready
+// options for the pie chart
 const pieOptions = {
     responsive: true,
     plugins: {
@@ -106,21 +160,35 @@ const pieOptions = {
     }
 };
 
-
-
 // For bubble chart
-const categories = [
-    { "Shopping": 1000 },
-    { "Chicken": 3000 },
-    { "Rent": 2500 },
-    { "Transport": 1000 },
-    { "Petrol": 4000 },
-    { "Education": 5000 },
-    { "Bike Maintainance": 2000 },
-]
+// function to convert the budgetEntries to the required structured dataset
+const buildBubbleChartData = (entries: budgetEntry[]) => {
+    const categoryMap: { [category: string]: number } = {};
+
+    entries.forEach((entry) => {
+        if (entry.paymentStatus.toLowerCase() !== "paid") return;
+
+        const cat = entry.category.trim();
+        if (categoryMap[cat]) {
+            categoryMap[cat] += entry.amount;
+        } else {
+            categoryMap[cat] = entry.amount;
+        }
+    });
+
+    const bubbleData = Object.entries(categoryMap).map(([category, amount]) => ({
+        [category]: amount,
+    }));
+
+    return bubbleData;
+};
+const categories = buildBubbleChartData(budgetEntries);
+
+// for generating random pastel/light colors 
 const maxAmount = Math.max(...categories.map(obj => Object.values(obj)[0]));
 const minSize = 60; // px
 const maxSize = 200; // px
+// function to generate random color based on HSL
 const getRandomColor = () => {
     const hue = Math.floor(Math.random() * 360); // any hue
     const saturation = 70 + Math.random() * 20; // 70–90%
@@ -128,8 +196,8 @@ const getRandomColor = () => {
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 };
 
-const Reports = () => {
 
+const Reports = () => {
     // For bubble hover
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const handleMouseEnter = (index: number) => setHoveredIndex(index);
@@ -142,6 +210,7 @@ const Reports = () => {
                 <span>Analyse all of your spendings 📊</span>
             </div>
 
+            {/* CUSTOM BUBBLE CHART */}
             <div id="bubble-chart">
                 {categories.length > 0 ? (
                     categories.map((cat, index) => {
@@ -207,6 +276,7 @@ const Reports = () => {
                         ],
                     }} options={options} height={400} width={400}></Line>
                 </div>
+
                 {/* PIE CHART */}
                 <div id='pie-chart'>
                     <Pie data={{
