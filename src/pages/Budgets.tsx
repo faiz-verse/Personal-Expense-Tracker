@@ -71,7 +71,8 @@ const Budgets = () => {
         return stored ? JSON.parse(stored) : [];
     });
     // This combines "All" + user budgets for UI
-    const budget = [defaultAllBudget, ...userBudgets];
+    // const [budget, setBudget] = useState<budgetsModel[]>([defaultAllBudget, ...userBudgets])
+    let budget = [defaultAllBudget, ...userBudgets];
 
     // const [activeBudget, setActiveBudget] = useState<string>("all") // plane useState
     // const activeBudget = useContext(activeBudgetContext) // using only use context without hook
@@ -139,6 +140,8 @@ const Budgets = () => {
                                     <DeleteIcon size={16} color='tomato' onClick={() => {
                                         const confirmed = window.confirm("Are you sure you want to delete this budget?");
                                         if (confirmed) {
+                                            const updatedAllBudgetEntries = budgetEntries.filter(budgetEntry => budgetEntry.budgetUUID !== activeBudget);
+                                            setBudgetEntries(updatedAllBudgetEntries);
                                             const updatedBudgets = userBudgets.filter(budget => budget.budgetUUID !== activeBudget);
                                             setUserBudgets(updatedBudgets);
                                         }
