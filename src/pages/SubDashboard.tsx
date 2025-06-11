@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { useNavigate } from "react-router-dom";
+
 import { IconBaseProps } from "react-icons";
 import { BsPlusLg } from "react-icons/bs";
 
@@ -36,6 +38,9 @@ interface budgetEntry {
 }
 
 const SubDashboard = () => {
+
+    // for navigating to the budgets
+    const navigate = useNavigate();
 
     const PlusIcon = BsPlusLg as React.ComponentType<IconBaseProps>;
 
@@ -142,7 +147,7 @@ const SubDashboard = () => {
                     <div id='budget-cards'>
                         {userBudgets.map((b, index) => {
                             return (
-                                <div className="budget-card">
+                                <div className="budget-card" onClick={() => navigate("/dashboard/budgets")}>
                                     <div className='budget-card-head'>
                                         <div>{b.title}</div>
                                         <div>{b.emoji}</div>

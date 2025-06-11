@@ -197,6 +197,7 @@
     flex-direction: column;
     gap: 15px;
     position: relative;
+    cursor: pointer;
 }
 
 .budget-card .budget-card-head div:nth-child(1) {
