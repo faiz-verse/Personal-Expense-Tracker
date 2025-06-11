@@ -188,12 +188,12 @@ const SubDashboard = () => {
                                             />
                                         </div>
                                         <div className='scale'>
-                                            <p>Limit: <b>&#8377;{b.limit}</b></p>
-                                            <p>Spent: <b>₹{FindBudgetExpense(b, budgetEntries)}</b></p>
+                                            <p className='limit'>Limit: <b>&#8377;{b.limit}</b></p>
+                                            <p className='spent'>Spent: <b>₹{FindBudgetExpense(b, budgetEntries)}</b></p>
                                             {FindPendingExpenses(b, budgetEntries) > 0 &&
-                                                <p>Pending: <b>₹{FindBudgetExpense(b, budgetEntries)}</b></p>
+                                                <p className='pending'>Pending: <b>₹{FindPendingExpenses(b, budgetEntries)}</b></p>
                                             }
-                                            <p>Available: <b>₹{(b.limit - FindBudgetExpense(b, budgetEntries))}</b></p>
+                                            <p className='available'>Available: <b>₹{(b.limit - FindBudgetExpense(b, budgetEntries))}</b></p>
                                         </div>
                                     </div>
                                 </div>
@@ -221,7 +221,7 @@ const SubDashboard = () => {
                                     <div className='e-row'>{be.category}</div>
                                     <div className='e-row'>{be.title}</div>
                                     <div className='e-row'>{be.amount}</div>
-                                    <div className='e-row'>{be.paymentStatus}</div>
+                                    <div className='e-row' style={{color: 'palegreen'}}>{be.paymentStatus}</div>
                                 </div>
                             );
                         })}

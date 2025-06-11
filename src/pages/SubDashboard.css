@@ -249,10 +249,10 @@
 .budget-card .budget-card-body .scale{
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 7px;
     position: absolute;
     bottom: 15px;
-    left: 15px;
+    left: 35px;
     width: 50%;
 }
 
@@ -260,8 +260,37 @@
     margin: 0;
     font-size: 12px;
     color: black;
+    position: relative;
 }
 
+.budget-card .budget-card-body .scale .limit::before{
+    content: '🚫';
+    font-size: 15px;
+    position: absolute;
+    left: -23px;
+    top: -3px;
+}
+.budget-card .budget-card-body .scale .spent::before{
+    content: '💸';
+    font-size: 15px;
+    position: absolute;
+    left: -23px;
+    top: -3px;
+}
+.budget-card .budget-card-body .scale .pending::before{
+    content: '⏳';
+    font-size: 15px;
+    position: absolute;
+    left: -23px;
+    top: -3px;
+}
+.budget-card .budget-card-body .scale .available::before{
+    content: '💹';
+    font-size: 15px;
+    position: absolute;
+    left: -23px;
+    top: -3px;
+}
 #sub-dashboard-right #sub-dashboard-right-bottom {
     min-height: 53%;
     width: 100%;
@@ -346,6 +375,7 @@
 
 #sub-dashboard-right #sub-dashboard-right-bottom #expenses .expense .e-row{
     mask-image: linear-gradient(to right, black 90%, transparent);
+    overflow: hidden;
 }
 
 #sub-dashboard-right #sub-dashboard-right-bottom #expenses .expense .e-row:nth-child(1){
@@ -362,4 +392,21 @@
 }
 #sub-dashboard-right #sub-dashboard-right-bottom #expenses .expense .e-row:nth-child(5){
     width: 10%;
+    box-sizing: border-box;
+    padding-left: 18px;
+    mask-image: none;
+    position: relative;
+    overflow: visible;
+    
+}
+
+#sub-dashboard-right #sub-dashboard-right-bottom #expenses .expense .e-row:nth-child(5)::before{
+    content: '';
+    height: 10px;
+    width: 10px;
+    background: palegreen;
+    border-radius: 50px;
+    position: absolute;
+    left: 0px;
+    top: 5px;
 }
