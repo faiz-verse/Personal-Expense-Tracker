@@ -73,9 +73,9 @@ const Budgets = () => {
     // This combines "All" + user budgets for UI
     const budget = [defaultAllBudget, ...userBudgets];
 
-    // const [activeBudget, setActiveBudget] = useState<string>("all")
-    // const activeBudget = useContext(activeBudgetContext)
-    const { activeBudget, setActiveBudget } = useActiveBudgetContext();
+    // const [activeBudget, setActiveBudget] = useState<string>("all") // plane useState
+    // const activeBudget = useContext(activeBudgetContext) // using only use context without hook
+    const { activeBudget, setActiveBudget } = useActiveBudgetContext(); // using context with hook
 
     const [budgetEntries, setBudgetEntries] = useState<budgetEntry[]>(() => {
         const storedEntries = localStorage.getItem("budgetEntries");
