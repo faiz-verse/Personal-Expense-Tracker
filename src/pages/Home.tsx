@@ -76,7 +76,7 @@ const Home: React.FC = () => {
           )}
         </div>
 
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis quidem adipisci at suscipit deleniti, fugit laborum perferendis quam quia error velit, maiores sint ab asperiores.</p>
+        <p>Easily keep track of where your money goes by recording your daily expenses and setting up custom budgets for different needs. You’ll be able to see how much you’ve spent, how much is left, and even get insights into your spending habits to help you manage better. Whether it’s for groceries, bills, or fun, everything stays organized so you always know where you stand financially.</p>
         <button onClick={() => navigate("/dashboard/sub-dashboard")}>Getting started</button>
       </div>
     </div>
