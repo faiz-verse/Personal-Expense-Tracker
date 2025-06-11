@@ -155,7 +155,7 @@ const Dashboard = () => {
                             strokeWidth={0.5}
                             color="#4d69ff"
                         />{" "}
-                        User Name
+                        Back
                     </div>
                 </div>
 

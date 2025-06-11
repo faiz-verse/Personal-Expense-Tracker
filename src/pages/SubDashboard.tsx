@@ -194,7 +194,7 @@ const SubDashboard = () => {
         <div id='sub-dashboard'>
             <div id='sub-dashboard-left'>
                 <div id='title'>
-                    <span>Hey User Name,</span>
+                    <span>Hey There!</span>
                     <span>Take a look at your current balance 👀</span>
                 </div>
 
@@ -204,9 +204,11 @@ const SubDashboard = () => {
                     <button id='next' onClick={handleNext}><RightArrow size={16} color='4d69ff' strokeWidth={1} /></button>
                 </div>
 
-                <button
+                <span style={{color: 'gray', fontSize: '12px'}}>Add a balance if it’s missing, or update it if your monthly income or limit has changed.</span>
+
+                <button id='add-balance'
                     onClick={() => {
-                        const userInput = prompt("Enter balance for the month:");
+                        const userInput = prompt(`Enter balance for the month: ${monthNames[currentMonth.getMonth()]} ${currentMonth.getFullYear()}`);
                         if (userInput) {
                             const newBalance = parseFloat(userInput);
                             if (!isNaN(newBalance)) {
@@ -214,8 +216,12 @@ const SubDashboard = () => {
                             }
                         }
                     }}
-                >
-                    Add / Update Balance
+                ><PlusIcon
+                        className="menu-option-icon"
+                        size={22}
+                        strokeWidth={0.5}
+                        color="#4d69ff"
+                    />Add / Update Balance
                 </button>
 
 
@@ -241,11 +247,11 @@ const SubDashboard = () => {
                     </div>
                     <div id="balance-spent">
                         <span>Spent</span>
-                        <span>&#8377; {balanceSpent}</span>
+                        <span style={{color: 'tomato'}}>&#8377; {balanceSpent}</span>
                     </div>
                     <div id="balance-available">
                         <span>Available</span>
-                        <span>&#8377; {balance - balanceSpent}</span>
+                        <span style={{color: (balance - balanceSpent) < 0 ? 'tomato': (balance - balanceSpent) >= 1000 ? 'palegreen': 'black'}}>&#8377; {balance - balanceSpent}</span>
                     </div>
                 </div>
 
