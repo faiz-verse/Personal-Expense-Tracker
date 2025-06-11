@@ -16,6 +16,9 @@ import './SubDashboard.css'
 
 import AddExpenseModal from '../components/AddExpenseModal';
 
+// importing context hook to use the context
+import { useActiveBudgetContext } from '../context/DashboardContext';
+
 interface budgetsModel {
     UUID: string,
     budgetUUID: string,
@@ -41,6 +44,7 @@ const SubDashboard = () => {
 
     // for navigating to the budgets
     const navigate = useNavigate();
+    const { activeBudget, setActiveBudget } = useActiveBudgetContext(); // using context with hook
 
     const PlusIcon = BsPlusLg as React.ComponentType<IconBaseProps>;
 
@@ -85,7 +89,9 @@ const SubDashboard = () => {
         let sumExpense = 0;
         const allExpenses = userEntries.filter((entry) => entry.budgetUUID === budget.budgetUUID)
         allExpenses.forEach((exp) => {
-            sumExpense = sumExpense + exp.amount
+            if (exp.paymentStatus.toLocaleLowerCase() === "paid") {
+                sumExpense = sumExpense + exp.amount
+            }
         })
         return sumExpense;
     }
@@ -144,10 +150,10 @@ const SubDashboard = () => {
             <div id='sub-dashboard-right'>
                 <div id='sub-dashboard-right-top'>
                     <span>Your Current Budgets</span>
-                    <div id='budget-cards'>
+                    {userBudgets.length > 0 ? <div id='budget-cards'>
                         {userBudgets.map((b, index) => {
                             return (
-                                <div className="budget-card" onClick={() => navigate("/dashboard/budgets")}>
+                                <div className="budget-card" onClick={() => { navigate("/dashboard/budgets"); setActiveBudget(b.budgetUUID) }}>
                                     <div className='budget-card-head'>
                                         <div>{b.title}</div>
                                         <div>{b.emoji}</div>
@@ -180,7 +186,9 @@ const SubDashboard = () => {
                                 </div>
                             )
                         })}
-                    </div>
+                    </div> :
+                        <span>No Added Budgets</span>
+                    }
                 </div>
                 <div id='sub-dashboard-right-bottom'>
                     <span>Your Expenses</span>
