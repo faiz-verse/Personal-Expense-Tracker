@@ -95,6 +95,16 @@ const SubDashboard = () => {
         })
         return sumExpense;
     }
+    const FindPendingExpenses = (budget: budgetsModel, userEntries: budgetEntry[]) => {
+        let pendingExpense = 0;
+        const allExpenses = userEntries.filter((entry) => entry.budgetUUID === budget.budgetUUID)
+        allExpenses.forEach((exp) => {
+            if (exp.paymentStatus.toLocaleLowerCase() !== "paid") {
+                pendingExpense = pendingExpense + exp.amount
+            }
+        })
+        return pendingExpense;
+    }
 
     return (
         <div id='sub-dashboard'>
@@ -180,6 +190,9 @@ const SubDashboard = () => {
                                         <div className='scale'>
                                             <p>Limit: <b>&#8377;{b.limit}</b></p>
                                             <p>Spent: <b>₹{FindBudgetExpense(b, budgetEntries)}</b></p>
+                                            {FindPendingExpenses(b, budgetEntries) > 0 &&
+                                                <p>Pending: <b>₹{FindBudgetExpense(b, budgetEntries)}</b></p>
+                                            }
                                             <p>Available: <b>₹{(b.limit - FindBudgetExpense(b, budgetEntries))}</b></p>
                                         </div>
                                     </div>
