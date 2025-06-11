@@ -95,6 +95,7 @@
 }
 
 #balance-graph #balance-spent {
+    min-width: 65px;
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -124,6 +125,7 @@
 }
 
 #balance-graph #balance-available {
+    min-width: 65px;
     display: flex;
     flex-direction: column;
     position: absolute;

@@ -51,9 +51,6 @@ const SubDashboard = () => {
     const LeftArrow = BsChevronLeft as React.ComponentType<IconBaseProps>;
     const RightArrow = BsChevronRight as React.ComponentType<IconBaseProps>;
 
-    const [balance, setBalance] = useState<number>(20000)
-    const [balanceSpent, setBalanceSpent] = useState<number>(14000)
-
     const [isExpModalActive, setIsExpModalActive] = useState<boolean>(false);
     const [isModalActive, setIsModalActive] = useState<boolean>(false);
 
@@ -117,6 +114,11 @@ const SubDashboard = () => {
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
+    const [monthlyBalances, setMonthlyBalances] = useState<{ month: number; year: number; balance: number }[]>(() => {
+        const stored = localStorage.getItem("monthlyBalances");
+        return stored ? JSON.parse(stored) : [];
+    });
+    // handle prev and next to change current month
     const handlePrev = () => {
         const prevMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() - 1));
         setCurrentMonth(new Date(prevMonth));
@@ -125,6 +127,68 @@ const SubDashboard = () => {
         const nextMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + 1));
         setCurrentMonth(new Date(nextMonth));
     };
+    // get balance for the current month
+    const getBalanceForCurrentMonth = () => {
+        const found = monthlyBalances.find(
+            (b) =>
+                b.month === currentMonth.getMonth() &&
+                b.year === currentMonth.getFullYear()
+        );
+        return found?.balance || 0;
+    };
+    // Add or update balance
+    const handleAddOrUpdateBalance = (newBalance: number) => {
+        const month = currentMonth.getMonth();
+        const year = currentMonth.getFullYear();
+
+        setMonthlyBalances((prev) => {
+            const existingIndex = prev.findIndex((b) => b.month === month && b.year === year);
+            if (existingIndex !== -1) {
+                // Update existing
+                const updated = [...prev];
+                updated[existingIndex].balance = newBalance;
+                return updated;
+            } else {
+                // Add new
+                return [...prev, { month, year, balance: newBalance }];
+            }
+        });
+    };
+    // Balance
+    const [balance, setBalance] = useState<number>(0);
+    useEffect(() => {
+        setBalance(getBalanceForCurrentMonth());
+    }, [currentMonth, monthlyBalances]);
+
+    const [balanceSpent, setBalanceSpent] = useState<number>(0)
+    useEffect(() => {
+        const currentMonthSpent = budgetEntries.reduce((acc, entry) => {
+            const entryDate = new Date(entry.date);
+            const isSameMonth =
+                entryDate.getMonth() === currentMonth.getMonth() &&
+                entryDate.getFullYear() === currentMonth.getFullYear();
+
+            if (entry.paymentStatus === "paid" && isSameMonth) {
+                return acc + entry.amount;
+            }
+            return acc;
+        }, 0);
+
+        setBalanceSpent(currentMonthSpent);
+    }, [budgetEntries, currentMonth]);
+
+    useEffect(() => {
+        const stored = localStorage.getItem("monthlyBalances");
+        if (stored) {
+            setMonthlyBalances(JSON.parse(stored));
+            console.log(JSON.parse(stored))
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("monthlyBalances", JSON.stringify(monthlyBalances));
+    }, [monthlyBalances]);
+
 
     return (
         <div id='sub-dashboard'>
@@ -135,19 +199,34 @@ const SubDashboard = () => {
                 </div>
 
                 <div id='container-month'>
-                        <button id='prev' onClick={handlePrev}><LeftArrow size={16} color='4d69ff' strokeWidth={1} /></button>
-                        <span>{monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}</span>
-                        <button id='next' onClick={handleNext}><RightArrow size={16} color='4d69ff' strokeWidth={1} /></button>
+                    <button id='prev' onClick={handlePrev}><LeftArrow size={16} color='4d69ff' strokeWidth={1} /></button>
+                    <span>{monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}</span>
+                    <button id='next' onClick={handleNext}><RightArrow size={16} color='4d69ff' strokeWidth={1} /></button>
                 </div>
+
+                <button
+                    onClick={() => {
+                        const userInput = prompt("Enter balance for the month:");
+                        if (userInput) {
+                            const newBalance = parseFloat(userInput);
+                            if (!isNaN(newBalance)) {
+                                handleAddOrUpdateBalance(newBalance);
+                            }
+                        }
+                    }}
+                >
+                    Add / Update Balance
+                </button>
+
 
                 <div id='balance-graph'>
                     <div id='balance'>
                         <span>Balance</span>
-                        <span>&#8377; {balance}</span>
+                        <span>&#8377; {balance || "Not Set"}</span>
                     </div>
                     <div id='graph'>
                         <CircularProgressbar
-                            value={((balance - balanceSpent) / balance) * 100}
+                            value={balance > 0 ? ((balance - balanceSpent) / balance) * 100 : 0}
                             text={`Available ₹${balance - balanceSpent}`}
                             strokeWidth={12}
                             styles={buildStyles({
