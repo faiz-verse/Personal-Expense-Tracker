@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
 import { IconBaseProps } from "react-icons";
-import { BsPlusLg } from "react-icons/bs";
+import { BsPlusLg, BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 // for circular graph
 import {
@@ -48,6 +48,8 @@ const SubDashboard = () => {
     const { activeBudget, setActiveBudget } = useActiveBudgetContext(); // using context with hook
 
     const PlusIcon = BsPlusLg as React.ComponentType<IconBaseProps>;
+    const LeftArrow = BsChevronLeft as React.ComponentType<IconBaseProps>;
+    const RightArrow = BsChevronRight as React.ComponentType<IconBaseProps>;
 
     const [balance, setBalance] = useState<number>(20000)
     const [balanceSpent, setBalanceSpent] = useState<number>(14000)
@@ -78,15 +80,15 @@ const SubDashboard = () => {
         return storedEntries ? JSON.parse(storedEntries) : [];
     });
 
-    // for setting userBudgets
+    // for setting userBudgets and entries
     useEffect(() => {
         localStorage.setItem("budgets", JSON.stringify(userBudgets));
     }, [userBudgets]);
-
     useEffect(() => {
         localStorage.setItem("budgetEntries", JSON.stringify(budgetEntries));
     }, [budgetEntries]);
 
+    // Functions to find all the expenses and pendings
     const FindBudgetExpense = (budget: budgetsModel, userEntries: budgetEntry[]) => {
         let sumExpense = 0;
         const allExpenses = userEntries.filter((entry) => entry.budgetUUID === budget.budgetUUID)
@@ -108,12 +110,34 @@ const SubDashboard = () => {
         return pendingExpense;
     }
 
+    // Month selector for the Balance Tracking
+    // For month change
+    const [currentMonth, setCurrentMonth] = useState(new Date());
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    const handlePrev = () => {
+        const prevMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() - 1));
+        setCurrentMonth(new Date(prevMonth));
+    };
+    const handleNext = () => {
+        const nextMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + 1));
+        setCurrentMonth(new Date(nextMonth));
+    };
+
     return (
         <div id='sub-dashboard'>
             <div id='sub-dashboard-left'>
                 <div id='title'>
                     <span>Hey User Name,</span>
                     <span>Take a look at your current balance 👀</span>
+                </div>
+
+                <div id='container-month'>
+                        <button id='prev' onClick={handlePrev}><LeftArrow size={16} color='4d69ff' strokeWidth={1} /></button>
+                        <span>{monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}</span>
+                        <button id='next' onClick={handleNext}><RightArrow size={16} color='4d69ff' strokeWidth={1} /></button>
                 </div>
 
                 <div id='balance-graph'>
@@ -234,8 +258,8 @@ const SubDashboard = () => {
 
                     </div> :
                         <div>
-                        <span>No expenses yet!</span>
-                        <p>You haven't added any expenses yet. Start by adding your first expense — it will be automatically categorized under the default 'All' budget unless you choose a specific one.</p>
+                            <span>No expenses yet!</span>
+                            <p>You haven't added any expenses yet. Start by adding your first expense — it will be automatically categorized under the default 'All' budget unless you choose a specific one.</p>
                         </div>
                     }
 

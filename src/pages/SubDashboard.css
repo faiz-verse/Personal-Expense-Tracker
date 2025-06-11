@@ -33,9 +33,32 @@
     color: gray;
 }
 
+/* Month selector */
+#container-month {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+#container-month #prev,
+#container-month #next {
+    all: unset;
+    height: 35px;
+    width: 35px;
+    background: #e7eaff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer
+}
+
 /* BALANCE GRAPH */
 #balance-graph {
-    margin-top: 50px;
+    margin-top: 20px;
     margin-bottom: 50px;
     height: 300px;
     display: flex;
