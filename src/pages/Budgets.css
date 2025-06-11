@@ -34,7 +34,7 @@
 /* Month changer */
 #container-buttons {
     position: absolute;
-    top: 65px;
+    top: 40px;
     right: 20px;
     display: flex;
     align-items: center;
@@ -49,6 +49,9 @@
     align-items: center;
     justify-content: space-between;
     font-weight: 600;
+    position: absolute;
+    left: -87%;
+    top: -55%;
 }
 
 #container-buttons #container-month #prev,
