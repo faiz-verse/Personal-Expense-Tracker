@@ -7,9 +7,12 @@
     justify-content: center;
     height: 100vh;
     width: 100vw;
-    background-color: rgba(0, 0, 0, 0.3); /* dark transparent background */
-    backdrop-filter: blur(4px); /* optional for blur effect */
-    z-index: 999; /* below the modal */
+    background-color: rgba(0, 0, 0, 0.3);
+    /* dark transparent background */
+    backdrop-filter: blur(4px);
+    /* optional for blur effect */
+    z-index: 999;
+    /* below the modal */
 }
 
 #add-expense-modal {
@@ -93,3 +96,8 @@
     opacity: 0.9;
 }
 
+@media (max-width: 480px) {
+    #add-expense-modal {
+        width: calc(100vw - 80px);
+    }
+}
