@@ -7,6 +7,8 @@ import {
     BsPiggyBankFill,
     BsArrowLeftRight,
     BsArrowBarLeft,
+    BsArrowBarRight,
+    BsPlusLg,
 } from "react-icons/bs";
 
 // for navigating back to the home
@@ -34,6 +36,8 @@ const Dashboard = () => {
     const BudgetIcon = BsPiggyBankFill as React.ComponentType<IconBaseProps>;
     const HistoryIcon = BsArrowLeftRight as React.ComponentType<IconBaseProps>;
     const BackIcon = BsArrowBarLeft as React.ComponentType<IconBaseProps>;
+    const SidebarIcon = BsArrowBarRight as React.ComponentType<IconBaseProps>;
+    const PlusIcon = BsPlusLg as React.ComponentType<IconBaseProps>;
 
     const [activeView, setActiveView] = useState<string>("sub-dashboard");
 
@@ -52,20 +56,33 @@ const Dashboard = () => {
     const [activeBudget, setActiveBudget] = useState<string>("all")
 
     // For responsiveness
-    const [screenSize, setScreenSize] = useState<number>(window.innerWidth)
-    useEffect(() => {
-        const screenWidth = window.innerWidth;
-        alert(`Screen width: ${screenWidth}`);
-
-        if (screenSize < 480) {
-            alert("You're on a phone!");
-        }
-    }, []);
+    const screenSize = window.innerWidth
+    const screenHeight = window.innerHeight
+    const [isSidebarActive, setIsSidebarActive] = useState<boolean>(false)
+    // useEffect(() => {
+    //     if (screenSize < 480) {
+    //         alert("You're on a phone!");
+    //     }
+    // }, []);
 
     return (
         <activeBudgetContext.Provider value={{ activeBudget, setActiveBudget }}>
             <div id="Dashboard">
-                <div id="side-menu">
+                <div id="side-menu" style={{left: isSidebarActive? '0%': '-85%'}}>
+                    {screenSize < 768 && <button onClick={()=> {setIsSidebarActive(!isSidebarActive)}}>
+                        {!isSidebarActive ? <SidebarIcon
+                            className="side-bar-icon"
+                            size={25}
+                            strokeWidth={0.5}
+                            color="#4d69ff"
+                        ></SidebarIcon> : <PlusIcon
+                            className="side-bar-icon"
+                            size={25}
+                            strokeWidth={0.5}
+                            color="#4d69ff"
+                            style={{rotate: '45deg'}}
+                        ></PlusIcon>}
+                    </button>}
                     <div id="side-menu-title">ExTrack</div>
                     <div id="menu-options">
                         <div
@@ -166,7 +183,7 @@ const Dashboard = () => {
                             size={20}
                             strokeWidth={0.5}
                             color="#4d69ff"
-                        />{" "}
+                        />&nbsp;
                         Back
                     </div>
                 </div>

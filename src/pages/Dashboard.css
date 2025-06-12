@@ -10,7 +10,7 @@
     user-select: none;
 }
 
-#side-menu{
+#side-menu {
     height: calc(100vh - 40px);
     width: 250px;
     background: #e7eaff;
@@ -25,12 +25,12 @@
     padding: 30px;
 }
 
-#side-menu-title{
+#side-menu-title {
     font-size: 30px;
     font-weight: 600;
 }
 
-#menu-options{
+#menu-options {
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -40,7 +40,7 @@
     font-size: 14px;
 }
 
-#menu-options .menu-option{
+#menu-options .menu-option {
     padding: 3px;
     border-radius: 5px;
     display: flex;
@@ -48,30 +48,104 @@
     cursor: pointer;
 }
 
-.menu-option .menu-option-icon{
+.menu-option .menu-option-icon {
     padding: 5px;
     border-radius: 5px;
     margin-right: 10px;
 }
 
-#menu-footer{
+#menu-footer {
     font-size: 18px;
     font-weight: 600;
     position: absolute;
     bottom: 30px;
-    
+
     display: flex;
     align-items: center;
 }
 
-#menu-footer .back-icon{
+#menu-footer .back-icon {
     padding: 5px;
     margin-right: 5px;
     cursor: pointer;
 }
 
-#View{
+#View {
     height: calc(100vh - 40px);
     width: calc(100vw - 300px);
     margin-left: 270px;
+}
+
+#side-menu button {
+    all: unset;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: -35px;
+}
+
+/* Extra Small Devices (phones < 375px) */
+@media (max-width: 374px) {
+    #side-menu {
+        height: 100vh;
+        width: calc(100vw - 45px);
+        top: 0;
+        left: 0;
+        z-index: 100;
+        border-radius: 10px;
+    }
+
+    #side-menu {
+        transition: left 0.5s ease-in-out;
+    }
+
+    #View {
+        height: calc(100vh - 40px);
+        width: 95vw;
+        margin-left: 10px;
+    }
+}
+
+/* Mobile Phones */
+@media (max-width: 480px) {
+    #side-menu {
+        height: 100vh;
+        width: calc(100vw - 45px);
+        top: 0;
+        left: 0;
+        z-index: 100;
+        border-radius: 10px;
+    }
+
+    #side-menu {
+        transition: left 0.5s ease-in-out;
+    }
+
+    #View {
+        height: calc(100vh - 40px);
+        width: 95vw;
+        margin-left: 10px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+    #side-menu {
+        height: 100vh;
+        width: calc(100vw - 45px);
+        top: 0;
+        left: 0;
+        z-index: 100;
+        border-radius: 10px;
+    }
+
+    #side-menu {
+        transition: left 0.5s ease-in-out;
+    }
+
+    #View {
+        height: calc(100vh - 40px);
+        width: 95vw;
+        margin-left: 10px;
+    }
 }
