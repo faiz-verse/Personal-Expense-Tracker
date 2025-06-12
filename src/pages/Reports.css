@@ -9,6 +9,8 @@
     overflow-y: scroll;
     scrollbar-width: thin;
     mask-image: linear-gradient(to top, black 98%, transparent);
+
+    position: relative;
 }
 
 /* TITLE */
@@ -98,4 +100,35 @@
     padding: 20px;
     background: #f9f9f9;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+#refresh-btn{
+    all: unset;
+    width: 150px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    background: #e7eaff;
+    cursor: pointer;
+
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    z-index: 10;
+}
+
+#refresh-btn::before{
+    content: 'Refresh if unable to see the changes';
+    position: absolute;
+    left: -180%;
+    bottom: 0;
+    width: 300px;
+    color: gray;
+    font-size: 14px;
 }

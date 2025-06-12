@@ -75,24 +75,3 @@
     width: calc(100vw - 300px);
     margin-left: 270px;
 }
-
-#clear-data-btn{
-    all: unset;
-    width: 180px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    box-sizing: border-box;
-    background: #e7eaff;
-    cursor: pointer;
-
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 10;
-}

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import { IconBaseProps } from "react-icons";
+import { BsArrowClockwise } from 'react-icons/bs';
+
 import './Reports.css';
 
 // For Line And Pie Chart
@@ -198,6 +201,9 @@ const getRandomColor = () => {
 
 
 const Reports = () => {
+
+    const RefreshIcon = BsArrowClockwise as React.ComponentType<IconBaseProps>;
+
     // For bubble hover
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const handleMouseEnter = (index: number) => setHoveredIndex(index);
@@ -205,6 +211,11 @@ const Reports = () => {
 
     return (
         <div id='reports'>
+
+            <button id="refresh-btn" onClick={()=>{
+                        window.location.reload();
+                }}><RefreshIcon size={16} color='#4d69ff'/>Refresh</button>
+
             <div id='title'>
                 <span>Spendings Report</span>
                 <span>Analyse all of your spendings 📊</span>
