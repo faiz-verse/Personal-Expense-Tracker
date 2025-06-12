@@ -63,7 +63,7 @@
     scale: 1.2;
 }
 
-#bubble-chart .bubble .bubble-helper{
+#bubble-chart .bubble .bubble-helper {
     position: absolute;
     top: 0;
     right: 0;
@@ -77,20 +77,21 @@
     transition: all 0.5s ease 0.5s;
 }
 
-#bubble-chart .bubble:hover .bubble-helper{
+#bubble-chart .bubble:hover .bubble-helper {
     opacity: 1;
     transform: translateY(0px);
 }
 
 /* Reports Bottom */
-#reports-bottom{
+#reports-bottom {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-#line-chart, #pie-chart{
+#line-chart,
+#pie-chart {
     width: 49%;
     box-sizing: border-box;
     display: flex;
@@ -102,7 +103,7 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
-#refresh-btn{
+#refresh-btn {
     all: unset;
     width: 150px;
     height: 35px;
@@ -123,7 +124,7 @@
     z-index: 10;
 }
 
-#refresh-btn::before{
+#refresh-btn::before {
     content: 'Refresh if unable to see the changes';
     position: absolute;
     left: -180%;
@@ -131,4 +132,148 @@
     width: 300px;
     color: gray;
     font-size: 14px;
+}
+
+/* Mobile Phones */
+@media (max-width: 480px) {
+    #reports {
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        overflow-y: scroll;
+        scrollbar-width: thin;
+        mask-image: linear-gradient(to top, black 98%, transparent);
+
+        position: relative;
+    }
+
+    /* TITLE */
+    #reports #title {
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #reports #title span:nth-child(1) {
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    #reports #title span:nth-child(2) {
+        font-size: 14px;
+        color: gray;
+    }
+
+    /* BUBBLE CHART */
+    #bubble-chart {
+        min-height: 400px;
+        width: 100%;
+        height: fit-content;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        padding: 20px;
+        background: #f9f9f9;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    #bubble-chart .bubble {
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 10px;
+        transition: all 0.9s ease-in-out;
+
+        position: relative;
+    }
+
+    #bubble-chart .bubble:hover {
+        scale: 1.2;
+    }
+
+    #bubble-chart .bubble .bubble-helper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.3);
+        color: white;
+        font-size: 10px;
+        padding: 5px;
+        border-radius: 5px;
+        transform: translateY(15px);
+        opacity: 0;
+        transition: all 0.5s ease 0.5s;
+    }
+
+    #bubble-chart .bubble:hover .bubble-helper {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+
+    /* Reports Bottom */
+    #reports-bottom {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    #line-chart,
+    #pie-chart {
+        width: 49%;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        padding: 20px;
+        background: #f9f9f9;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    #refresh-btn {
+        all: unset;
+        width: 150px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        box-sizing: border-box;
+        background: #e7eaff;
+        cursor: pointer;
+
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        z-index: 10;
+    }
+
+    #refresh-btn::before {
+        content: 'Refresh if unable to see the changes';
+        position: absolute;
+        left: -180%;
+        bottom: 0;
+        width: 300px;
+        color: gray;
+        font-size: 14px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+    /* styles for tablets portrait */
 }
