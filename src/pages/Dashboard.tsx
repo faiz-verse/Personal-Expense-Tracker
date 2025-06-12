@@ -27,6 +27,7 @@ import History from "./History";
 import { activeBudgetContext } from "../context/DashboardContext";
 
 const Dashboard = () => {
+
     // for icons
     const DashboardIcon = BsFillHouseDoorFill as React.ComponentType<IconBaseProps>;
     const ReportIcon = BsFileEarmarkBarGraphFill as React.ComponentType<IconBaseProps>;
@@ -50,8 +51,19 @@ const Dashboard = () => {
     // for context
     const [activeBudget, setActiveBudget] = useState<string>("all")
 
+    // For responsiveness
+    const [screenSize, setScreenSize] = useState<number>(window.innerWidth)
+    useEffect(() => {
+        const screenWidth = window.innerWidth;
+        alert(`Screen width: ${screenWidth}`);
+
+        if (screenSize < 480) {
+            alert("You're on a phone!");
+        }
+    }, []);
+
     return (
-        <activeBudgetContext.Provider value={{activeBudget, setActiveBudget}}>
+        <activeBudgetContext.Provider value={{ activeBudget, setActiveBudget }}>
             <div id="Dashboard">
                 <div id="side-menu">
                     <div id="side-menu-title">ExTrack</div>
