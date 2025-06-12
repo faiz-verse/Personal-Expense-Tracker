@@ -68,7 +68,7 @@ const Dashboard = () => {
     return (
         <activeBudgetContext.Provider value={{ activeBudget, setActiveBudget }}>
             <div id="Dashboard">
-                <div id="side-menu" style={{left: isSidebarActive? '0%': '-85%'}}>
+                <div id="side-menu" style={{left: screenSize < 768 ? isSidebarActive? '0%': '-85%' : '20px'}}>
                     {screenSize < 768 && <button onClick={()=> {setIsSidebarActive(!isSidebarActive)}}>
                         {!isSidebarActive ? <SidebarIcon
                             className="side-bar-icon"
