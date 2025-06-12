@@ -68,42 +68,6 @@
     font-weight: 600;
 }
 
-#nav #login-options {
-    width: fit-content;
-    height: 40px;
-
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-
-    position: absolute;
-    right: 10%;
-}
-
-#nav #login-options span {
-    font-size: 16px;
-    font-weight: 400;
-}
-
-#nav #login-options button {
-    all: unset;
-
-    width: fit-content;
-    height: fit-content;
-    padding: 10px 15px;
-    color: #4d69ff;
-    font-size: 16px;
-    font-weight: 600;
-
-    border-radius: 3px;
-    border: 1px solid #4d69ff;
-
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
 #home-content {
     width: fit-content;
     height: fit-content;
@@ -218,3 +182,70 @@
         opacity: 1;
     }
 }
+
+/* Extra Small Devices (phones < 375px) */
+@media (max-width: 374px) {
+    #nav {
+        height: 100px;
+    }
+
+    #bg-animation {
+        bottom: -6.5%;
+    }
+
+    #home-content #title {
+        margin-top: 20px;
+        height: 100px;
+        font-size: 60px;
+    }
+
+    #home-content p {
+        font-size: 14px;
+        max-width: 70vw;
+    }
+}
+
+/* Mobile Phones */
+@media (max-width: 480px) {
+    #nav {
+        height: 100px;
+    }
+
+    #bg-animation {
+        bottom: -5.5%;
+    }
+
+    #home-content #title {
+        height: 100px;
+        font-size: 65px;
+    }
+
+    #home-content p {
+        font-size: 14px;
+        max-width: 70vw;
+    }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+    #bg-animation {
+        bottom: -7.5%;
+    }
+
+    #home-content #title {
+        margin-top: 20px;
+        height: 100px;
+        font-size: 80px;
+    }
+
+    #home-content p {
+        font-size: 14px;
+        max-width: 70vw;
+    }
+}
+
+/* Small Laptops */
+@media (min-width: 769px) and (max-width: 1024px) {}
+
+/* Medium to Large Laptops */
+@media (min-width: 1025px) and (max-width: 1440px) {}
