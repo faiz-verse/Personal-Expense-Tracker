@@ -71,8 +71,7 @@ const Budgets = () => {
         return stored ? JSON.parse(stored) : [];
     });
     // This combines "All" + user budgets for UI
-    // const [budget, setBudget] = useState<budgetsModel[]>([defaultAllBudget, ...userBudgets])
-    let budget = [defaultAllBudget, ...userBudgets];
+    const budget = [defaultAllBudget, ...userBudgets];
 
     // const [activeBudget, setActiveBudget] = useState<string>("all") // plane useState
     // const activeBudget = useContext(activeBudgetContext) // using only use context without hook
