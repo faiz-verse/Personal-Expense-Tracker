@@ -117,7 +117,7 @@
     }
     #side-menu {
         height: 100vh;
-        width: calc(100vw - 45px);
+        width: calc(100vw - 48px);
         top: 0;
         left: 0;
         z-index: 100;
@@ -136,13 +136,13 @@
 }
 
 /* Tablets */
-@media (min-width: 481px) and (max-width: 768px) {
+@media (min-width: 481px) and (max-width: 750px) {
     #Dashboard {
         overflow-y: auto;
     }
     #side-menu {
         height: 100vh;
-        width: calc(100vw - 45px);
+        width: calc(100vw - 80px);
         top: 0;
         left: 0;
         z-index: 100;
