@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
 import { IconBaseProps } from "react-icons";
-import { BsPlusLg, BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { BsPlusLg, BsChevronLeft, BsChevronRight, BsTrash3Fill } from "react-icons/bs";
 
 // for circular graph
 import {
@@ -50,6 +50,7 @@ const SubDashboard = () => {
     const PlusIcon = BsPlusLg as React.ComponentType<IconBaseProps>;
     const LeftArrow = BsChevronLeft as React.ComponentType<IconBaseProps>;
     const RightArrow = BsChevronRight as React.ComponentType<IconBaseProps>;
+    const DeleteIcon = BsTrash3Fill as React.ComponentType<IconBaseProps>;
 
     const [isExpModalActive, setIsExpModalActive] = useState<boolean>(false);
     const [isModalActive, setIsModalActive] = useState<boolean>(false);
@@ -192,6 +193,15 @@ const SubDashboard = () => {
 
     return (
         <div id='sub-dashboard'>
+
+            <button id="clear-data-btn" onClick={()=>{
+                    const isConfirm = window.confirm("Are you sure? All the data will be lost!");
+                    if(isConfirm){
+                        localStorage.clear();
+                        window.location.reload();
+                    }
+                }}><DeleteIcon size={16} color='tomato'/>Clear all Data</button>
+
             <div id='sub-dashboard-left'>
                 <div id='title'>
                     <span>Hey There!</span>
