@@ -76,7 +76,7 @@ const Home: React.FC = () => {
           )}
         </div>
 
-        <p>Easily keep track of where your money goes by recording your daily expenses and setting up custom budgets for different needs. You’ll be able to see how much you’ve spent, how much is left, and even get insights into your spending habits to help you manage better. Whether it’s for groceries, bills, or fun, everything stays organized so you always know where you stand financially.</p>
+        <p>Track your spending easily by recording daily expenses and setting custom budgets. Stay organized, monitor your balance, and gain insights to manage your finances better.</p>
         <button onClick={() => navigate("/dashboard/sub-dashboard")}>Getting started</button>
       </div>
     </div>
