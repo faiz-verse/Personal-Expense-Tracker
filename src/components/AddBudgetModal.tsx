@@ -49,15 +49,11 @@ const AddBudgetModal = ({ isModalActive, setIsModalActive, budgets, setBudgets }
         setTags(tags.filter((_, i) => i !== indexToRemove));
     };
 
-    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter' || e.key === ',') {
             e.preventDefault();
             addTag();
         }
-    };
-
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setInput(e.target.value);
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -166,10 +162,11 @@ const AddBudgetModal = ({ isModalActive, setIsModalActive, budgets, setBudgets }
                                 style={{
                                     background: '#e0e0e0',
                                     padding: '5px 10px',
-                                    borderRadius: '15px',
+                                    borderRadius: '50px',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    fontSize: '14px',
+                                    fontSize: '12px',
+                                    height: '20px',
                                 }}
                             >
                                 {tag}
@@ -185,11 +182,11 @@ const AddBudgetModal = ({ isModalActive, setIsModalActive, budgets, setBudgets }
                                 </span>
                             </div>
                         ))}
-                        <input
-                            type="text"
+                        <textarea
+                            rows={1}
                             placeholder="Type and press Enter"
                             value={input}
-                            onChange={handleChange}
+                            onChange={(e) => setInput(e.target.value)}
                             onKeyDown={handleKeyDown}
                             style={{
                                 border: 'none',
@@ -197,8 +194,10 @@ const AddBudgetModal = ({ isModalActive, setIsModalActive, budgets, setBudgets }
                                 flex: 1,
                                 fontSize: '14px',
                                 minWidth: '120px',
+                                resize: 'none',
                             }}
                         />
+
                     </div>
 
                     <label>
