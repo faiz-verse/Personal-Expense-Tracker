@@ -187,10 +187,13 @@ const buildBubbleChartData = (entries: budgetEntry[]) => {
 };
 const categories = buildBubbleChartData(budgetEntries);
 
+// For responsiveness
+const screenSize = window.innerWidth
+
 // for generating random pastel/light colors 
 const maxAmount = Math.max(...categories.map(obj => Object.values(obj)[0]));
-const minSize = 60; // px
-const maxSize = 200; // px
+const minSize = screenSize < 768 ? 40 : 60; // px
+const maxSize = screenSize < 768 ? 150 : 200; // px
 // function to generate random color based on HSL
 const getRandomColor = () => {
     const hue = Math.floor(Math.random() * 360); // any hue
@@ -198,7 +201,6 @@ const getRandomColor = () => {
     const lightness = 50 + Math.random() * 10;  // 80–90%
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 };
-
 
 const Reports = () => {
 
@@ -212,9 +214,9 @@ const Reports = () => {
     return (
         <div id='reports'>
 
-            <button id="refresh-btn" onClick={()=>{
-                        window.location.reload();
-                }}><RefreshIcon size={16} color='#4d69ff'/>Refresh</button>
+            <button id="refresh-btn" onClick={() => {
+                window.location.reload();
+            }}><RefreshIcon size={16} color='#4d69ff' />Refresh</button>
 
             <div id='title'>
                 <span>Spendings Report</span>
@@ -240,7 +242,7 @@ const Reports = () => {
                                     height: `${size}px`,
                                     backgroundColor: color,
                                     boxShadow: hoveredIndex === index ? `0 0 20px ${color}` : `0 0 10px ${color}`,
-                                    margin: `-${10 + Math.random() * 20}px`,
+                                    margin: screenSize < 768 ? `-${5 + Math.random() * 15}px` : `-${10 + Math.random() * 20}px`,
                                     transform: `translateY(${-50 + Math.random() * 80}px)`,
                                     zIndex: hoveredIndex === index ? '100' : `${index}`,
                                     opacity: hoveredIndex === index ? '1' : '0.5',

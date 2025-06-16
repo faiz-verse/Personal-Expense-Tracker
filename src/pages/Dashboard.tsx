@@ -57,7 +57,6 @@ const Dashboard = () => {
 
     // For responsiveness
     const screenSize = window.innerWidth
-    const screenHeight = window.innerHeight
     const [isSidebarActive, setIsSidebarActive] = useState<boolean>(false)
     // useEffect(() => {
     //     if (screenSize < 480) {
