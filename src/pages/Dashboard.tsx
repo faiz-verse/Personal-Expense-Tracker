@@ -84,7 +84,7 @@ const Dashboard = () => {
                             style={{rotate: '45deg'}}
                         ></PlusIcon>}
                     </button>}
-                    <div id="side-menu-title">ExTrack</div>
+                    <div id="side-menu-title" onClick={()=> navigate('/')}>ExTrack</div>
                     <div id="menu-options">
                         <div
                             className="menu-option"
