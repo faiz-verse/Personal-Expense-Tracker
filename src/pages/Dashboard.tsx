@@ -88,8 +88,9 @@ const Dashboard = () => {
                             className="menu-option"
                             id="dashboard-option"
                             onClick={() => {
-                                navigate("/dashboard/sub-dashboard")
+                                navigate("/dashboard/sub-dashboard");
                                 setActiveView("sub-dashboard");
+                                setIsSidebarActive(!isSidebarActive);
                             }}
                             style={{
                                 background:
@@ -111,8 +112,9 @@ const Dashboard = () => {
                             className="menu-option"
                             id="resports-option"
                             onClick={() => {
-                                navigate("/dashboard/reports")
+                                navigate("/dashboard/reports");
                                 setActiveView("reports");
+                                setIsSidebarActive(!isSidebarActive);
                             }}
                             style={{
                                 background: activeView === "reports" ? "#cdd5ff" : "transparent",
@@ -133,8 +135,9 @@ const Dashboard = () => {
                             className="menu-option"
                             id="budgets-option"
                             onClick={() => {
-                                navigate("/dashboard/budgets")
+                                navigate("/dashboard/budgets");
                                 setActiveView("budgets");
+                                setIsSidebarActive(!isSidebarActive);
                             }}
                             style={{
                                 background: activeView === "budgets" ? "#cdd5ff" : "transparent",
@@ -155,8 +158,9 @@ const Dashboard = () => {
                             className="menu-option"
                             id="history-option"
                             onClick={() => {
-                                navigate("/dashboard/history")
+                                navigate("/dashboard/history");
                                 setActiveView("history");
+                                setIsSidebarActive(!isSidebarActive);
                             }}
                             style={{
                                 background: activeView === "history" ? "#cdd5ff" : "transparent",
