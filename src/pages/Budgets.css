@@ -271,6 +271,7 @@
 
 /* Mobile Phones */
 @media (max-width: 480px) {
+
     /* TITLE */
     #budgets #title {
         margin-top: 90px;
@@ -294,7 +295,7 @@
         height: 72.5%;
         width: 100%;
         overflow: auto;
-        mask-image: linear-gradient(to right, black 95%, transparent);
+        mask-image: linear-gradient(to right, black 98%, transparent);
         box-sizing: border-box;
         padding-right: 60px;
         position: relative;
@@ -306,7 +307,7 @@
         position: absolute;
     }
 
-    #budgets #title::after{
+    #budgets #title::after {
         content: '↔ scroll ↕';
         width: 100px;
         color: gray;
@@ -318,6 +319,7 @@
 
 /* Tablets */
 @media (min-width: 481px) and (max-width: 768px) {
+
     /* TITLE */
     #budgets #title {
         margin-top: 90px;
@@ -353,7 +355,7 @@
         position: absolute;
     }
 
-    #budgets #title::after{
+    #budgets #title::after {
         content: '↔ scroll ↕';
         width: 100px;
         color: gray;

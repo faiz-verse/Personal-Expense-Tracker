@@ -99,5 +99,7 @@
 @media (max-width: 480px) {
     #add-expense-modal {
         width: calc(100vw - 80px);
+        scale: 0.92;
+        transform-origin: 50% 0%;
     }
 }

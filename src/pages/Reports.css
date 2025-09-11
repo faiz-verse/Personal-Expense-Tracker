@@ -149,6 +149,10 @@
         width: 100%;
     }
 
+    #bubble-chart .bubble {
+        scale: 0.7;
+    }
+
     /* Reports Bottom */
     #reports-bottom {
         width: 100%;
@@ -198,6 +202,10 @@
         margin-top: 60px;
         min-height: 350px;
         width: 100%;
+    }
+
+    #bubble-chart .bubble {
+        scale: 0.8;
     }
 
     /* Reports Bottom */

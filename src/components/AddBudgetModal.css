@@ -145,6 +145,8 @@
 @media (max-width: 480px) {
     #add-budget-modal {
         width: calc(100vw - 80px);
+        scale: 0.92;
+        transform-origin: 50% 0%;
     }
 
     #emoji-picker #picker {

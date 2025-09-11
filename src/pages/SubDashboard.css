@@ -245,7 +245,7 @@
     padding-right: 100px;
     scrollbar-width: thin;
 
-    mask-image: linear-gradient(to right, black 80%, transparent);
+    mask-image: linear-gradient(to right, black 90%, transparent);
 }
 
 .budget-card {
